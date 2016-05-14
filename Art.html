@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Art</title>
+	<style type="text/css">
+		input[type=number], input[type=text] {
+			display: inline-block;
+			width: 75px;
+		}
+		input[type=submit] {
+			margin-left: 25px;
+		}
+		label {
+			display: inline-block;
+			width: 75px;
+			margin-left: 25px;
+		}
+	</style>
+
+	<script type="text/javascript">
+
+		var angle, list, speed, currentId = 0
+
+		function drawNext(id, posx, posy, lastAngle, i) {
+			if (id == currentId) {
+				if (typeof i == "undefined") i = 0;
+				var ctx = document.getElementById("canvas").getContext("2d");
+				var nextAngle = lastAngle + Math.PI / angle * list[i % list.length];
+				var nextPosx = posx + Math.cos(nextAngle) * 50;
+				var nextPosy = posy - Math.sin(nextAngle) * 50;
+				ctx.moveTo(posx, posy);
+				ctx.lineTo(nextPosx, nextPosy)
+				ctx.stroke();
+				setTimeout(drawNext, speed, id, nextPosx, nextPosy, nextAngle, ++i);
+			} else {
+				console.log(id, "stopped")
+			}
+		}
+
+		function start(form) {
+			var ctx = document.getElementById("canvas").getContext("2d");
+			ctx.clearRect(0, 0, 1920, 1080);
+			ctx.beginPath();
+			angle = form.randomangle.checked ? parseInt(Math.random() * 5) + 2 : +form.angle.value;
+			list = form.randomlist.checked ? new Array(+form.randomlistnbr.value).fill(0).map(function(x){return parseInt(Math.random() * (angle + (form.spade.checked ? 1 : 0)))}) : JSON.parse(form.list.value);
+			speed = +form.speed.value;
+			drawNext(++currentId, 1920 / 2, 1080 / 3, 0);
+			form.generated.value = angle + ": " + JSON.stringify(list);
+			return false;
+		}
+
+		function stop() {
+			currentId++;
+		}
+
+	</script>
+
+</head>
+<body onload="">
+	<form onsubmit="return start(this)">
+		<p>
+			<label for=angle title="PI / x">Angle:</label>
+			<input type=number name=angle min=2 step=1 placeholder="4">
+
+			<label for=randomangle title="Génère un angle aléatoire entre PI/2 et PI/6">Aléatoire ?</label>
+			<input type=checkbox name=randomangle>
+
+			<label for=spade title="Si la valeur PI est authorisée (changer de direction pour revenir au précédent point)">Piques ?</label>
+			<input type=checkbox name=spade>
+		</p>
+		<p>
+			<label for=list title="La séquence selon la quelle le dessin sera dessiné, par exemple la séquence [1,0] avec un angle de 2 (PI/2) dessinera un grand carré (Changer de direction de 1 * PI/2 (aller à droite) puis changer de direction de 0 * PI/2 (aller tout droit). Les nombres doivent entre compris entre +/- Angle">Séquence:</label>
+			<input type=text placeholder="[1,1,2,-1]" name=list>
+
+			<label for=randomlist title="Génère une séquence aléatoire de 'nombre' occurence en fonction de l'angle">Aléatoire ?</label>
+			<input type=checkbox name=randomlist>
+
+			<label for=randomlistnbr title="Le nmobre d'occurence dans la séquence générée">Nombre: </label>
+			<input type=number min=1 max=50 step=1 value=15 name=randomlistnbr>
+		</p>
+		<p>
+			<label for=speed title="La vitesse du crayon">Vitesse: </label>
+			<input type=range name=speed min=0 max=100 step=-10 value=0>
+		</p>
+		<p>
+			<input type=submit value="Générer">
+		</p>
+		<p>
+			<label for=generated>Actuelle: </label><input type=text disabled style="width: 350px" name=generated>
+		</p>
+	</form>
+	<canvas id="canvas" width="1920" height="1080"></canvas>
+</body>
+</html>
