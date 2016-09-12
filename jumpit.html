@@ -6,21 +6,21 @@
     <script type="text/javascript">
         var canvas;
         var ctx;
+        var music;
+        var brwa;
+        var score;
 
         var CANVAS_HEIGTH = 400;
-
-        var posX = 25.0;
-        var posY = 200.0;
+        var POSX = 25.0;
         var VELX = 15.0;
-        var velY = 0.0;
         var GRAVITY = 0.5;
         var JUMP = 10.0;
-
         var SPEED = 33;
 
-        var onGround = true;
-        var cubes = [[0.0, 200.0, 400.0]];
-        for (var i = 0; i < 10; i++) newCube();
+        var posY;
+        var velY;
+        var onGround;
+        var cubes;
         var rCube;
 
         var loopFunc;
@@ -29,15 +29,30 @@
             canvas = document.getElementById('canvas');
             canvas.height = CANVAS_HEIGTH;
             ctx = canvas.getContext('2d');
+            music = document.getElementById("music");
+            brwa = document.getElementById("brwa");
+            score = document.getElementById("score");
+            start()
+        }
+
+        function start() {
+            window.removeEventListener("keypress", start);
             window.addEventListener("keydown", startJump, false);
             window.addEventListener("keyup", endJump, false);
+            score.textContent = "0";
+            music.play();
+            posY = 200.0;
+            onGround = true;
+            velY = 0.0;
+            cubes = [[0.0, 200.0, 400.0]];
+            for (var i = 0; i < 10; i++) newCube();
             loopFunc = setInterval(loop, SPEED);
         }
 
         function newCube() {
             var lastCubeHeight = CANVAS_HEIGTH - cubes[cubes.length - 1][1];
             var maxGapWidth = (-JUMP - Math.sqrt(Math.pow(JUMP, 2) + 2 * GRAVITY * lastCubeHeight)) / (-GRAVITY);
-            var gapWidth = maxGapWidth / 5 + (maxGapWidth - 2 * maxGapWidth / 5) * Math.random();
+            var gapWidth = maxGapWidth / 10 + (maxGapWidth - maxGapWidth / 5) * Math.random();
             var maxHeight = lastCubeHeight + JUMP * gapWidth - GRAVITY * Math.pow(gapWidth, 2) / 2;
             var height = 1.0 + (maxHeight - 11.0) * Math.random();
 
@@ -63,16 +78,16 @@
         function update() {
             posY += velY; 
             for (var i = 0; i < cubes.length; i++) cubes[i][0] -= VELX;
-            if (cubes[0][0] + cubes[0][2] + posX - 10 < 0) {
+            if (cubes[0][0] + cubes[0][2] + POSX - 10 < 0) {
                 newCube();
                 rCube = cubes.shift();
-                document.getElementById("score").textContent = +document.getElementById("score").textContent + 1
+                score.textContent = +score.textContent + 1
             }
             if (rCube !== void 0 && rCube[0] + rCube[2] < 0) rCube = [];
 
 
             velY += GRAVITY;
-            if (posX + 10.0 > cubes[0][0] && posX - 10 < cubes[0][0] + cubes[0][2] && posY <= cubes[0][1] && posY < CANVAS_HEIGTH) {
+            if (POSX + 10.0 > cubes[0][0] && POSX - 10 < cubes[0][0] + cubes[0][2] && posY <= cubes[0][1] && posY < CANVAS_HEIGTH) {
                 if (posY + 2 * velY > cubes[0][1]) {
                     onGround = true;
                     posY = cubes[0][1];
@@ -81,20 +96,22 @@
                     posY += velY;
                 }
 
-            } else if ((posX + 10.0 <= cubes[0][0] || posX - 10 >= cubes[0][0] + cubes[0][2]) && posY + velY < CANVAS_HEIGTH ) {
+            } else if ((POSX + 10.0 <= cubes[0][0] || POSX - 10 >= cubes[0][0] + cubes[0][2]) && posY + velY < CANVAS_HEIGTH ) {
                 onGround = false;
                 posY += velY;
 
             } else {
-                console.log("end")
-                clearInterval(loopFunc)
+                clearInterval(loopFunc);
+                music.pause();
+                brwa.play();
+                window.addEventListener("keypress", start, false);
             }
         }
 
         function render() {
             ctx.clearRect(0, 0, 1600, CANVAS_HEIGTH);
             ctx.beginPath()
-            ctx.rect(posX - 10, posY - 20, 20, 20);
+            ctx.rect(POSX - 10, posY - 20, 20, 20);
             ctx.fill();
             for (var i = 0; i < cubes.length; i++) {
                 ctx.rect(cubes[i][0], cubes[i][1], cubes[i][2], 1600 - cubes[i][1]);
@@ -129,5 +146,12 @@
     <h1>Jump it !</h1>
     <canvas id="canvas" width="1600" height="800"></canvas>
     <p id="p_score">Score: <span id="score">0</span></p>
+    <p><a href="https://www.github.com/Julien00859/Julien00859.githup.io/jumpit.html">Source code</a> on Github. Music <a href="https://youtu.be/MzRGBdHsSvo">Sound Ward</a> by DJVI</p>
+    <audio loop autoplay id="music">
+        <source src="/DJVI - Sound Ward.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="brwa">
+        <source src="https://www.myinstants.com/media/sounds/movie_1.mp3" type="audio/mpeg">
+    </audio> 
 </body>
 </html>
