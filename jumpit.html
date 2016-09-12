@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jump it !</title>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+        var canvas;
+        var ctx;
+
+        var CANVAS_HEIGTH = 400;
+
+        var posX = 25.0;
+        var posY = 200.0;
+        var VELX = 15.0;
+        var velY = 0.0;
+        var GRAVITY = 0.5;
+        var JUMP = 10.0;
+
+        var SPEED = 33;
+
+        var onGround = true;
+        var cubes = [[0.0, 200.0, 400.0]];
+        for (var i = 0; i < 10; i++) newCube();
+        var rCube;
+
+        var loopFunc;
+
+        function main() {
+            canvas = document.getElementById('canvas');
+            canvas.height = CANVAS_HEIGTH;
+            ctx = canvas.getContext('2d');
+            window.addEventListener("keydown", startJump, false);
+            window.addEventListener("keyup", endJump, false);
+            loopFunc = setInterval(loop, SPEED);
+        }
+
+        function newCube() {
+            var lastCubeHeight = CANVAS_HEIGTH - cubes[cubes.length - 1][1];
+            var maxGapWidth = (-JUMP - Math.sqrt(Math.pow(JUMP, 2) + 2 * GRAVITY * lastCubeHeight)) / (-GRAVITY);
+            var gapWidth = maxGapWidth / 5 + (maxGapWidth - 2 * maxGapWidth / 5) * Math.random();
+            var maxHeight = lastCubeHeight + JUMP * gapWidth - GRAVITY * Math.pow(gapWidth, 2) / 2;
+            var height = 1.0 + (maxHeight - 11.0) * Math.random();
+
+            cubes.push([
+                cubes[cubes.length - 1][0] + cubes[cubes.length - 1][2] + gapWidth * VELX,
+                CANVAS_HEIGTH - height,
+                100.0 + 400.0 * Math.random() 
+            ]);
+            
+        }
+
+        function startJump() {
+            if (onGround) {
+                velY = -JUMP;
+                onGround = false;
+            }
+        }
+
+        function endJump() {
+            if (velY < -1.0) velY = -1.0;
+        }
+
+        function update() {
+            posY += velY; 
+            for (var i = 0; i < cubes.length; i++) cubes[i][0] -= VELX;
+            if (cubes[0][0] + cubes[0][2] + posX - 10 < 0) {
+                newCube();
+                rCube = cubes.shift();
+                document.getElementById("score").textContent = +document.getElementById("score").textContent + 1
+            }
+            if (rCube !== void 0 && rCube[0] + rCube[2] < 0) rCube = [];
+
+
+            velY += GRAVITY;
+            if (posX + 10.0 > cubes[0][0] && posX - 10 < cubes[0][0] + cubes[0][2] && posY <= cubes[0][1] && posY < CANVAS_HEIGTH) {
+                if (posY + 2 * velY > cubes[0][1]) {
+                    onGround = true;
+                    posY = cubes[0][1];
+                    velY = 0.0;
+                } else {
+                    posY += velY;
+                }
+
+            } else if ((posX + 10.0 <= cubes[0][0] || posX - 10 >= cubes[0][0] + cubes[0][2]) && posY + velY < CANVAS_HEIGTH ) {
+                onGround = false;
+                posY += velY;
+
+            } else {
+                console.log("end")
+                clearInterval(loopFunc)
+            }
+        }
+
+        function render() {
+            ctx.clearRect(0, 0, 1600, CANVAS_HEIGTH);
+            ctx.beginPath()
+            ctx.rect(posX - 10, posY - 20, 20, 20);
+            ctx.fill();
+            for (var i = 0; i < cubes.length; i++) {
+                ctx.rect(cubes[i][0], cubes[i][1], cubes[i][2], 1600 - cubes[i][1]);
+                ctx.stroke();
+            }
+            if (rCube !== void 0) {
+                ctx.rect(rCube[0], rCube[1], rCube[2], 1600 - rCube[1]);
+                ctx.stroke();
+            }
+
+            ctx.closePath()
+        }
+
+        function loop() {
+            update();
+            render();
+        }
+
+    </script>
+    <style>
+        body {
+            width: 100%;
+            font-family: sans-serif;
+            text-align: center;
+        }
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body onload="main()">
+    <h1>Jump it !</h1>
+    <canvas id="canvas" width="1600" height="800"></canvas>
+    <p id="p_score">Score: <span id="score">0</span></p>
+</body>
+</html>
