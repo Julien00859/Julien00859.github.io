@@ -77,18 +77,18 @@
     <body onload="main()">
         <form name="frm">
             <p>                
-                <label for="addressText">Adresse IPV4: </label><input type=text name="addressText" placeholder="Adresse" class="addr">
-                <label for="maskNum">Masque: </label><input type=number min=0 max=32 step=1 name="maskNum" placeholder="0..32">
+                <label for="addressText">Adresse IPV4: </label><input type=text name="addressText" placeholder="Adresse" size=15>
+                <label for="maskNum">Masque: </label><input type=number min=0 max=32 step=1 name="maskNum" placeholder="0..32" size=4>
                 <input type=submit value="Calculer">
             </p>
             <fieldset>
                 <p>
-                    Adresse binaire: <input readonly type=text name="addressBin" class="bin"><br>
-                    Masque binaire:&nbsp; <input readonly type=text name="maskBin" class="bin">
+                    Adresse binaire: <input readonly type=text name="addressBin" size=32><br>
+                    Masque binaire:&nbsp; <input readonly type=text name="maskBin" size=32>
                 </p>
                 <p>
-                    Passerelle par défaut: <input readonly type=text name="network" class="addr"><br>
-                    Adresse de diffusion:&nbsp; <input readonly type=text name="broadcast" class="addr">
+                    Passerelle par défaut: <input readonly type=text name="network" size=15><br>
+                    Adresse de diffusion:&nbsp; <input readonly type=text name="broadcast" size=15>
                 </p>
             </fieldset>
         </form>
