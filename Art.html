@@ -23,6 +23,8 @@
 	<script type="text/javascript">
 
 		var angle, list, speed, lineWidth, width, height, currentId = 0
+		
+		var stored_angle, stored_pos_x, stored_pos_y;
 
 		function main() {
 			document.getElementById("frm").addEventListener("submit", draw);
@@ -50,6 +52,11 @@
 		}
 
 		function drawNext(id, posx, posy, lastAngle, i) {
+			if (i == 0) {
+				stored_angle = lastAngle;
+				stored_pos_x = posx;
+				stored_pos_y = posy;
+			}
 			if (id == currentId) {
 				if (typeof i == "undefined") i = 0;
 				var ctx = document.getElementById("canvas").getContext("2d");
@@ -59,7 +66,8 @@
 				ctx.moveTo(posx, posy);
 				ctx.lineTo(nextPosx, nextPosy)
 				ctx.stroke();
-				setTimeout(drawNext, speed, id, nextPosx, nextPosy, nextAngle, ++i);
+				if (!(nextPosx == stored_pos_x && nextPosy == stored_pos_y && nextAngle == stored_angle)))
+					setTimeout(drawNext, speed, id, nextPosx, nextPosy, nextAngle, ++i);
 			} else {
 				console.log(id, "stopped")
 			}
