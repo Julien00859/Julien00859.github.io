@@ -40,12 +40,12 @@
 			else document.getElementsByClassName("random")[0].setAttribute("hidden", true);
 
 			width = document.body.clientWidth;
-			height = (window.innerHeight - document.getElementById("frm").clientHeight - 40) * 2;
-			document.getElementById("canvas").width = width;
-			document.getElementById("canvas").height = height;
-			document.getElementsByName("centerx")[0].max = width;
+			height = window.innerHeight - document.getElementById("frm").clientHeight - 40;
+			document.getElementById("canvas").width = width - 20;
+			document.getElementById("canvas").height = height * 2;
+			document.getElementsByName("centerx")[0].max = width - 20;
 			document.getElementsByName("centerx")[0].value = parseInt(width / 2);
-			document.getElementsByName("centery")[0].max = height;
+			document.getElementsByName("centery")[0].max = height * 2;
 			document.getElementsByName("centery")[0].value = parseInt(height / 2);
 
 			document.getElementsByName("generated")[0].value = "";
@@ -66,7 +66,7 @@
 				ctx.moveTo(posx, posy);
 				ctx.lineTo(nextPosx, nextPosy)
 				ctx.stroke();
-				if (!(nextPosx == stored_pos_x && nextPosy == stored_pos_y && nextAngle == stored_angle)))
+				if (!(nextPosx == stored_pos_x && nextPosy == stored_pos_y && nextAngle == stored_angle))
 					setTimeout(drawNext, speed, id, nextPosx, nextPosy, nextAngle, ++i);
 			} else {
 				console.log(id, "stopped")
