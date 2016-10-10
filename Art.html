@@ -40,7 +40,7 @@
 			else document.getElementsByClassName("random")[0].setAttribute("hidden", true);
 
 			width = document.body.clientWidth;
-			height = window.innerHeight - document.getElementById("frm").clientHeight - 40;
+			height = (window.innerHeight - document.getElementById("frm").clientHeight - 40) * 2;
 			document.getElementById("canvas").width = width;
 			document.getElementById("canvas").height = height;
 			document.getElementsByName("centerx")[0].max = width;
