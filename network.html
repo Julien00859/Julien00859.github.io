@@ -8,18 +8,19 @@
             body {
                 font-family: "Roboto Mono";
             }
+            #input label:hover{
+                text-decoration: underline;
+            }
             input {
                 font-family: "Roboto Mono";
             }
             input[type=number] {
                 width: 4em;
             }
-            .bin {
-                width: 300px;
+            #output {
+                /*need to align the output*/
             }
-            .addr {
-                width: 150px;
-            }
+
         </style>
         <script>
             var ip;
@@ -62,33 +63,65 @@
                 return slash;
             }
 
+            function changeDisplay(type) {
+                toShow = document.getElementsByClassName(type == "bin" ? "bin" : "text")
+                toHide = document.getElementsByClassName(type == "text" ? "bin" : "text")
+                for (var i = 0; i < toShow.length; i++) {
+                    toHide[i].setAttribute("hidden", true);
+                    toShow[i].removeAttribute("hidden");
+                }
+            }
+
             function main() {
                 document.frm.addEventListener("submit", function(event) {
+                    event.preventDefault();
                     ip = new IPv4(document.frm.addressText.value, +document.frm.maskNum.value);
                     document.frm.addressBin.value = IPToBinary(ip.address);
                     document.frm.maskBin.value = IPToBinary(ip.mask);
-                    document.frm.network.value = IPToString(ip.network);
-                    document.frm.broadcast.value = IPToString(ip.broadcast);
-                    event.preventDefault();
-                })
+                    document.frm.networkBin.value = IPToBinary(ip.network);
+                    document.frm.broadcastBin.value = IPToBinary(ip.broadcast);
+                    document.frm.maskText.value = IPToString(ip.mask)
+                    document.frm.networkText.value = IPToString(ip.network);
+                    document.frm.broadcastText.value = IPToString(ip.broadcast);
+                });
+
+                document.frm.rtext.addEventListener("change", function(event){
+                    changeDisplay("text");
+                });
+
+                document.frm.rbin.addEventListener("change", function(event){
+                    changeDisplay("bin");
+                });
             }
         </script>
     </head>
     <body onload="main()">
         <form name="frm">
-            <p>                
-                <label for="addressText">Adresse IPV4: </label><input type=text name="addressText" placeholder="Adresse" size=15>
-                <label for="maskNum">Masque: </label><input type=number min=0 max=32 step=1 name="maskNum" placeholder="0..32" size=4>
-                <input type=submit value="Calculer">
+            <p id="input">                
+                <label for="addressText">Adresse IPV4:</label>
+                <input type=text name="addressText" placeholder="Adresse" size=15 class=text>
+                <input type=text readonly hidden name="addressBin" size=32 class=bin>
+                <label for="maskNum">Masque:</label>
+                <input type=number min=0 max=32 step=1 name="maskNum" placeholder="0..32" size=4>
+                <input type=submit value="Calculer"><br>
+            </p>
+            <p id="option">
+                <label for=rtext>Afficher en décimal</label>
+                <input type=radio name=bintext value=text id=rtext checked>
+                <label for=rbin>Afficher en binaire</label>
+                <input type=radio name=bintext value=bin id=rbin>
             </p>
             <fieldset>
-                <p>
-                    Adresse binaire: <input readonly type=text name="addressBin" size=32><br>
-                    Masque binaire:&nbsp; <input readonly type=text name="maskBin" size=32>
-                </p>
-                <p>
-                    Passerelle par défaut: <input readonly type=text name="network" size=15><br>
-                    Adresse de diffusion:&nbsp; <input readonly type=text name="broadcast" size=15>
+                <p id="output">
+                    <label>Masque:</label>
+                    <input readonly type=text name="maskText" size=15 class=text>
+                    <input hidden readonly type=text name="maskBin" size=32 class=bin><br>
+                    <label>Passerelle par défaut:</label>
+                    <input readonly type=text name="networkText" size=15 class=text>
+                    <input hidden readonly type=text name="networkBin" size=32 class=bin><br>
+                    <label>Adresse de diffusion:</label>
+                    <input readonly type=text name="broadcastText" size=15 class=text>
+                    <input hidden readonly type=text name="broadcastBin" size=32 class=bin>
                 </p>
             </fieldset>
         </form>
