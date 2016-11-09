@@ -3,94 +3,94 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Cisco Cheatsheet</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
 		<style>
-            body {
-                font-family: Roboto
-            }
-        </style>
+			body {
+				font-family: Roboto;
+				padding: 0.1em;
+			}
+			a {
+				text-decoration: none;
+			}
+			.text {
+				counter-reset: line;
+				text-indent: 1em;
+			}
+			.code {
+				font-family: "Roboto Mono";
+				background-color: #efefef;
+				text-indent: 2em;
+				margin: 0;
+			}
+			.counter:before {
+				border-right: 1px solid #ddd;
+				counter-increment: line;
+				content: counter(line);
+				padding: 0 .5em;
+				margin-right: .5em;
+				color: #333;
+				font-size: small;
+			}
+		</style>
 	</head>
 	<body>
-		<h2><a id="Commandes_sur_le_terminal__0"></a>Commandes sur le terminal (&gt;)</h2>
-		<ul>
-			<li>Passe en mode admin</li>
-		</ul>
-		<p><code>enable</code></p>
-		<h2><a id="Commandes_sur_le_terminal_en_admin__6"></a>Commandes sur le terminal en admin (#)</h2>
-		<ul>
-			<li>Sauvegarder la configuration courante dans la configuration de démarrage</li>
-		</ul>
-		<p><code>copy running-config startup-config</code></p>
-		<ul>
-			<li>Affiche la configuration courante</li>
-		</ul>
-		<p><code>show running-config</code></p>
-		<ul>
-			<li>Affiche les informations sur une interface</li>
-		</ul>
-		<p><code>show interfaces &lt;interface&gt;</code></p>
-		<ul>
-			<li>Affiche les informations sur les route ip</li>
-		</ul>
-		<p><code>show ip route</code></p>
-		<ul>
-			<li>Permet d’utiliser <code>show</code> dans n’importe quel niveau de configuration</li>
-		</ul>
-		<p><code>do show run</code></p>
-		<ul>
-			<li>Entre dans la configuration de ce terminal</li>
-		</ul>
-		<p><code>configure terminal</code></p>
-		<h2><a id="Commandes_sur_la_configuration_du_terminal_config_33"></a>Commandes sur la configuration du terminal (config)</h2>
-		<ul>
-			<li>Change le nom de l’appareil</li>
-		</ul>
-		<p><code>hostname &lt;name&gt;</code></p>
-		<ul>
-			<li>Active le cryptage des mots de passe de type <code>password</code> avec un cryptage faible</li>
-		</ul>
-		<p><code>service password-encryption</code></p>
-		<ul>
-			<li>Ajoute un mot de passe non crypté (sauf si le service <code>password-encryption</code> est activé)</li>
-		</ul>
-		<p><code>enable password &lt;password&gt;</code></p>
-		<ul>
-			<li>Ajoute un mot de passe crypté avec un cryptage fort</li>
-		</ul>
-		<p><code>enable secret</code></p>
-		<ul>
-			<li>Configure une route statique (sur les routeurs)</li>
-		</ul>
-		<p><code>ip route &lt;network&gt; &lt;mask&gt; &lt;interface&gt;</code></p>
-		<ul>
-			<li>Entre dans la configuration d’une interface (<code>f0/0</code>, <code>s0/0/0</code>, <code>vlan</code>)</li>
-		</ul>
-		<p><code>interface &lt;interface&gt;</code></p>
-		<ul>
-			<li>Entre dans la configuration des interfaces de type <code>line</code></li>
-		</ul>
-		<p><code>interface vty &lt;start-port&gt; &lt;stop-port&gt;</code></p>
-		<h2><a id="Commandes_sur_la_configuration_des_terminaux_configif_63"></a>Commandes sur la configuration des terminaux (config-if)</h2>
-		<ul>
-			<li>Définie une adresse IP</li>
-		</ul>
-		<p><code>ip address &lt;ip&gt; &lt;mask&gt;</code></p>
-		<ul>
-			<li>Sur un câble série de type DCE/DTE du coté du DCE, limite la fréquence de l’horloge</li>
-		</ul>
-		<p><code>clock rate &lt;clock-rate&gt;</code></p>
-		<ul>
-			<li>Allume l’interface</li>
-		</ul>
-		<p><code>no shutdown</code></p>
-		<h2><a id="Commandes_sur_la_configuration_du_vty_configline_77"></a>Commandes sur la configuration du vty (config-line)</h2>
-		<ul>
-			<li>Défini un mot de passe</li>
-		</ul>
-		<p><code>password &lt;password&gt;</code></p>
-		<ul>
-			<li>Autorise la connexion sur ce port</li>
-		</ul>
-		<p><code>login</code></p>
+		<h2 id="dollar"><a href="#dollar">#</a> Commandes sur le terminal (&gt;)</h2>
+		<p class=text>Passe en mode admin<p>
+		<p class=code>enable<p>
+		<h2 id="hashtag"><a href="#hashtag">#</a> Commandes sur le terminal en admin (#)</h2>
+		<p class=text>Sauvegarder la configuration courante dans la configuration de démarrage<p>
+		<p class=code>copy running-config startup-config<p>
+		<p class=text>Affiche la configuration courante<p>
+		<p class=code>show running-config<p>
+		<p class=text>Affiche les informations sur une interface<p>
+		<p class=code>show interfaces &lt;interface&gt;<p>
+		<p class=text>Affiche les informations sur les route ip<p>
+		<p class=code>show ip route<p>
+		<p class=text>Permet d’utiliser show dans n’importe quel niveau de configuration<p>
+		<p class=code>do show run<p>
+		<p class=text>Entre dans la configuration de ce terminal<p>
+		<p class=code>configure terminal<p>
+		<h2 id="config"><a href="#config">#</a> Commandes sur la configuration du terminal (config)</h2>
+		<p class=text>Change le nom de l’appareil<p>
+		<p class=code>hostname &lt;name&gt;<p>
+		<p class=text>Active le cryptage des mots de passe de type password avec un cryptage faible<p>
+		<p class=code>service password-encryption<p>
+		<p class=text>Ajoute un mot de passe non crypté (sauf si le service password-encryption est activé)<p>
+		<p class=code>enable password &lt;password&gt;<p>
+		<p class=text>Ajoute un mot de passe crypté avec un cryptage fort<p>
+		<p class=code>enable secret<p>
+		<p class=text>Configure une route statique (sur les routeurs)<p>
+		<p class=code>ip route &lt;network&gt; &lt;mask&gt; &lt;interface&gt;<p>
+		<p class=text>Entre dans la configuration d’une interface (f0/0, s0/0/0, vlan)<p>
+		<p class=code>interface &lt;interface&gt;<p>
+		<p class=text>Entre dans la configuration des interfaces de type line<p>
+		<p class=code>interface vty &lt;start-port&gt; &lt;stop-port&gt;<p>
+		<h2 id="config-if"><a href="#config-if">#</a> Commandes sur la configuration des terminaux (config-if)</h2>
+		<p class=text>Définie une adresse IP<p>
+		<p class=code>ip address &lt;ip&gt; &lt;mask&gt;<p>
+		<p class=text>Sur un câble série de type DCE/DTE du coté du DCE, limite la fréquence de l’horloge<p>
+		<p class=code>clock rate &lt;clock-rate&gt;<p>
+		<p class=text>Allume l’interface<p>
+		<p class=code>no shutdown<p>
+		<h2 id="config-line"><a href="#config-line">#</a> Commandes sur la configuration du vty (config-line)</h2>
+		<p class=text>Défini un mot de passe<p>
+		<p class=code>password &lt;password&gt;<p>
+		<p class=text>Autorise la connexion sur ce port<p>
+		<p class=code>login<p>
+		<p class=text>Configuration du vlan</p>
+		<p class=code>switchport mode trunk</p>
+		<p class=code>switchport mode trunk native vlan 99</p>
+		<h2 id="scripts"><a href="#scripts">#</a> Quelques scripts</h2>
+		<p class=text>Configurer SSH</p>
+		<p class="code counter">enable</p>
+		<p class="code counter">$ enable<p>
+		<p class="code counter"># conf t<p>
+		<p class="code counter">(config)# hostname &lt;nom de l'appareil&gt;<p>
+		<p class="code counter">(config)# ip domain-name &lt;nom de domaine&gt;<p>
+		<p class="code counter">(config)# enable password &lt;mot de passe&gt;<p>
+		<p class="code counter">(config)# crypto key generate rsa<p>
+		<p class="code counter">(config)# line vty &lt;port start> &lt;port end&gt;<p>
+		<p class="code counter">(config-line)# input transport ssh<p>
+		<p class="code counter">(config-line)# login<p>
 	</body>
 </html>
