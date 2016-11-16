@@ -34,10 +34,6 @@
 		</style>
 	</head>
 	<body>
-		<p>un para</p>
-		<p>un para</p>
-		<p>un para</p>
-		<p>un para</p>
 		<h2 id="dollar"><a href="#dollar">#</a> Commandes sur le terminal (&gt;)</h2>
 		<p class=text>Passe en mode admin<p>
 		<p class=code>enable<p>
@@ -81,12 +77,22 @@
 		<p class=code>password &lt;password&gt;<p>
 		<p class=text>Autorise la connexion sur ce port<p>
 		<p class=code>login<p>
-		<p class=text>Configuration du vlan</p>
+		<h3 id="vlan"><a href="#vlan">#</a>Configuration du vlan</h3>
+		<h3 class=text>Configuration du vlan</h3>
+		<p class=text>Vers un PC (ajouter/retirer le n° du vlan dans la trame)<p>
+		<p class=code>switchport mode access</p>
+		<p class=text>Vers un switch (ne pas modifier la trame)<p>
 		<p class=code>switchport mode trunk</p>
-		<p class=code>switchport mode trunk native vlan 99</p>
+		<p class=text>Définir le vlan natif (celui pour lequel on ne modifie pas la trame entre plusieurs switch)<p>
+		<p class=code>switchport trunk native vlan &lt;vlan natif&gt;</p>
+		<p class=text>Permet d'utilier les autres commandes de port-security<p>
+		<p class=code>switchport port-security</p>
+		<p class=text>N'autorise qu'un certain nombre d'adresse mac pour cette interface<p>
+		<p class=code>switchport port-security maximum &lt;nombre&gt;</p>
+		<p class=text>Défini l'adresse mac autorisée où avec <span class=code>sticky</span> la 1e à se connecter<p>
+		<p class=code>switchport port-security mac-address &lt;&lt;mac-address&gt;|sticky&gt;</p>
 		<h2 id="scripts"><a href="#scripts">#</a> Quelques scripts</h2>
 		<p class=text>Configurer SSH</p>
-		<p class="code counter">enable</p>
 		<p class="code counter">$ enable</p>
 		<p class="code counter"># conf t</p>
 		<p class="code counter">(config)# hostname &lt;nom de l'appareil&gt;</p>
