@@ -34,9 +34,12 @@
 		</style>
 	</head>
 	<body>
+		<!--$-->
 		<h2 id="dollar"><a href="#dollar">#</a> Commandes sur le terminal (&gt;)</h2>
 		<p class=text>Passe en mode admin<p>
 		<p class=code>enable<p>
+		
+		<!--#-->
 		<h2 id="hashtag"><a href="#hashtag">#</a> Commandes sur le terminal en admin (#)</h2>
 		<p class=text>Sauvegarder la configuration courante dans la configuration de démarrage<p>
 		<p class=code>copy running-config startup-config<p>
@@ -50,6 +53,8 @@
 		<p class=code>do show run<p>
 		<p class=text>Entre dans la configuration de ce terminal<p>
 		<p class=code>configure terminal<p>
+		
+		<!--config-->
 		<h2 id="config"><a href="#config">#</a> Commandes sur la configuration du terminal (config)</h2>
 		<p class=text>Change le nom de l’appareil<p>
 		<p class=code>hostname &lt;name&gt;<p>
@@ -60,11 +65,21 @@
 		<p class=text>Ajoute un mot de passe crypté avec un cryptage fort<p>
 		<p class=code>enable secret<p>
 		<p class=text>Configure une route statique (sur les routeurs)<p>
-		<p class=code>ip route &lt;network&gt; &lt;mask&gt; &lt;interface&gt;<p>
+		<p class=code>ip route &lt;network&gt; &lt;mask&gt; &lt;interface|ip-address&gt;<p>
+		<p class=text>Désactive la résolution des noms (empêche packet-tracer de buguer quand on rentre une commande invalide)</p>
+		<p class=code>no ip domain-lookup</p>
+		<p class=text>Défini le message du jour</p>
+		<p class=code>banner motd # &lt;message&gt; #</p>
 		<p class=text>Entre dans la configuration d’une interface (f0/0, s0/0/0, vlan)<p>
 		<p class=code>interface &lt;interface&gt;<p>
 		<p class=text>Entre dans la configuration des interfaces de type line<p>
 		<p class=code>interface vty &lt;start-port&gt; &lt;stop-port&gt;<p>
+		<p class=text>Entre dans la configuration des vlan</p>
+		<p class=code>vlan &lt;vlan&gt;</p>
+		<p class=text>Utilise le protocol de routage RIP</p>
+		<p class=code>router rip</p>
+		
+		<!--config-if-->
 		<h2 id="config-if"><a href="#config-if">#</a> Commandes sur la configuration des terminaux (config-if)</h2>
 		<p class=text>Définie une adresse IP<p>
 		<p class=code>ip address &lt;ip&gt; &lt;mask&gt;<p>
@@ -72,6 +87,7 @@
 		<p class=code>clock rate &lt;clock-rate&gt;<p>
 		<p class=text>Allume l’interface<p>
 		<p class=code>no shutdown<p>
+		<!--vlan-->
 		<h3 id="vlan"><a href="#vlan">#</a> Configuration du vlan (config-if)</h3>
 		<p class=text>Défini le mode du vlan<p>
 		<p class=code>switchport mode &lt;access|trunk&gt;</p>
@@ -85,11 +101,22 @@
 		<p class=code>switchport port-security maximum &lt;nombre&gt;</p>
 		<p class=text>Défini l'adresse mac autorisée ou avec <span class=code>sticky</span> la 1e à se connecter<p>
 		<p class=code>switchport port-security mac-address &lt;&lt;mac-address&gt;|sticky&gt;</p>
+		
+		<!--config-line-->
 		<h2 id="config-line"><a href="#config-line">#</a> Commandes sur la configuration du vty (config-line)</h2>
 		<p class=text>Défini un mot de passe<p>
 		<p class=code>password &lt;password&gt;<p>
 		<p class=text>Autorise la connexion sur ce port<p>
 		<p class=code>login<p>
+		
+		<!--config-router-->
+		<h2 id="config-router"><a href="#config-router">#</a> Commandes pour la configuration des protocols de routage</h2>
+		<!--rip-->
+		<h3 id="rip"><a href="#rip">#</a> RIP</h3>
+		<p class=text>Utilise la version 2 du protocol</p>
+		<p class=code>version 2</p>
+		
+		<!--scripts-->
 		<h2 id="scripts"><a href="#scripts">#</a> Quelques scripts</h2>
 		<p class=text>Configurer SSH</p>
 		<p class="code counter">$ enable</p>
