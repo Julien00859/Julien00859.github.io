@@ -72,15 +72,9 @@
 		<p class=code>clock rate &lt;clock-rate&gt;<p>
 		<p class=text>Allume l’interface<p>
 		<p class=code>no shutdown<p>
-		<h2 id="config-line"><a href="#config-line">#</a> Commandes sur la configuration du vty (config-line)</h2>
-		<p class=text>Défini un mot de passe<p>
-		<p class=code>password &lt;password&gt;<p>
-		<p class=text>Autorise la connexion sur ce port<p>
-		<p class=code>login<p>
-		<h3 id="vlan"><a href="#vlan">#</a>Configuration du vlan</h3>
-		<h3 class=text>Configuration du vlan</h3>
-		<p class=text>Vers un PC (ajouter/retirer le n° du vlan dans la trame)<p>
-		<p class=code>switchport mode access</p>
+		<h3 id="vlan"><a href="#vlan">#</a>Configuration du vlan (config-if)</h3>
+		<p class=text>Défini le mode du vlan<p>
+		<p class=code>switchport mode &lt;access|trunk&gt;</p>
 		<p class=text>Vers un switch (ne pas modifier la trame)<p>
 		<p class=code>switchport mode trunk</p>
 		<p class=text>Définir le vlan natif (celui pour lequel on ne modifie pas la trame entre plusieurs switch)<p>
@@ -91,6 +85,11 @@
 		<p class=code>switchport port-security maximum &lt;nombre&gt;</p>
 		<p class=text>Défini l'adresse mac autorisée où avec <span class=code>sticky</span> la 1e à se connecter<p>
 		<p class=code>switchport port-security mac-address &lt;&lt;mac-address&gt;|sticky&gt;</p>
+		<h2 id="config-line"><a href="#config-line">#</a> Commandes sur la configuration du vty (config-line)</h2>
+		<p class=text>Défini un mot de passe<p>
+		<p class=code>password &lt;password&gt;<p>
+		<p class=text>Autorise la connexion sur ce port<p>
+		<p class=code>login<p>
 		<h2 id="scripts"><a href="#scripts">#</a> Quelques scripts</h2>
 		<p class=text>Configurer SSH</p>
 		<p class="code counter">$ enable</p>
