@@ -101,5 +101,15 @@
 		<p class="code counter">(config)# line vty &lt;port start> &lt;port end&gt;</p>
 		<p class="code counter">(config-line)# input transport ssh</p>
 		<p class="code counter">(config-line)# login</p>
+		<p class=text>Configurer VTP</p>
+		<p class="code counter">S1(config)# vtp mode server</p>
+		<p class="code counter">S1(config)# vtp domain &lt;domain&gt;</p>
+		<p class="code counter">S1(config)# vtp password &lt;password&gt;</p>
+		<p class="code counter">S2(config)# vtp mode client</p>
+		<p class="code counter">S2(config)# vtp domain &lt;domain&gt;</p>
+		<p class="code counter">S2(config)# vtp password &lt;password&gt;</p>
+		<p class="code counter">S3(config)# vtp mode client</p>
+		<p class="code counter">S3(config)# vtp domain &lt;domain&gt;</p>
+		<p class="code counter">S3(config)# vtp password &lt;password&gt;</p>
 	</body>
 </html>
