@@ -35,6 +35,16 @@
 		</style>
 	</head>
 	<body>
+<!-- 
+ip nat outside|inside
+ip nat source list 1 interface HigabitEthernet0/1 overload
+access-list 1 permit 10.0.0.0 0.0.0.255
+access-list 1 permit|deny <address>|any [~mask]
+ip nat inside source static <ip> <ip>
+ip nat pool TOTO 201.10.10.1 201.10.10.2 netmask 255.255.255.0
+ip nat pool TOTO source list 1 pool TOTO overload
+ip nat inside source static tcp 10.0.0.2 80 202.0.5.1 80
+-->
 		<!--$-->
 		<h2 id="dollar"><a href="#dollar">#</a> Commandes sur le terminal (&gt;)</h2>
 		<p class=text>Passe en mode admin<p>
