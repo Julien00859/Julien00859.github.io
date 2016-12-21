@@ -107,12 +107,19 @@ ip nat inside source static tcp 10.0.0.2 80 202.0.5.1 80
 		<p class=code>switchport access vlan &lt;vlan&gt;</p>
 		<p class=text>Définir le vlan natif (celui pour lequel on ne modifie pas la trame entre plusieurs switch)<p>
 		<p class=code>switchport trunk native vlan &lt;vlan natif&gt;</p>
-		<p class=text>Permet d'utilier les autres commandes de port-security<p>
+		<p class=text>Active la sécurité des ports<p>
 		<p class=code>switchport port-security</p>
 		<p class=text>N'autorise qu'un certain nombre d'adresse mac pour cette interface<p>
 		<p class=code>switchport port-security maximum &lt;nombre&gt;</p>
 		<p class=text>Défini l'adresse mac autorisée ou avec <span class=code>sticky</span> la 1e à se connecter<p>
 		<p class=code>switchport port-security mac-address &lt;&lt;mac-address&gt;|sticky&gt;</p>
+		<p class=text>Défini l'action à entreprendre si un port non-autorisé se connect</p>
+		<ul>
+			<li><span class=code>protect</span>: bloque les trames</li>
+			<li><span class=code>restrict</span>: bloque les trames et enregistre un message dans les logs</li>
+			<li><span class=code>shutdown</span>: met l'interface en mode <span class=code>administratively down</span>, un admin réseau devra <span class=code>no shutdown</span> celle-ci pour qu'elle puisse de nouveau être utilisée</li>
+		</ul>
+		<p class=code>switchport port-security violation protect|restrict|shutdown</p>
 		
 		<!--config-line-->
 		<h2 id="config-line"><a href="#config-line">#</a> Commandes sur la configuration du vty (config-line)</h2>
@@ -153,11 +160,9 @@ ip nat inside source static tcp 10.0.0.2 80 202.0.5.1 80
 
 		<!--ressources-->
 		<h2 id="ressources"><a href="#ressources">#</a> Ressources additionnelles</h2>
-		<p>
-			<ul>
-				<li><a href="https://github.com/izanagi1995/Synthese_Reseau_2/blob/master/README.md" target="_blank">Synthèse de Nicolas Surleraux</a></li>
-				<li><a href="http://pastebin.com/G9V9YuXX"> target="_blanck">Résulution de la préparation à l'examen pratique</a></li>
-			</ul>
-		</p>
+		<ul>
+			<li><a href="https://github.com/izanagi1995/Synthese_Reseau_2/blob/master/README.md" target="_blank">Synthèse de Nicolas Surleraux</a></li>
+			<li><a href="http://pastebin.com/G9V9YuXX" target="_blank">Résulution de la préparation à l'examen pratique</a></li>
+		</ul>
 	</body>
 </html>
