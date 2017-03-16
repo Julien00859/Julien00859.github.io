@@ -76,7 +76,7 @@ ip nat inside source static tcp 10.0.0.2 80 202.0.5.1 80
 		<p class=text>Ajoute un mot de passe crypté avec un cryptage fort<p>
 		<p class=code>enable secret<p>
 		<p class=text>Configure une route statique (sur les routeurs)<p>
-		<p class=code>ip route &lt;network&gt; &lt;mask&gt; &lt;interface|ip-address&gt;<p>
+		<p class=code>ip route &lt;network&gt; &lt;mask&gt; (&lt;interface|ip-address&gt;)<p>
 		<p class=text>Désactive la résolution des noms (empêche packet-tracer de buguer quand on rentre une commande invalide)</p>
 		<p class=code>no ip domain-lookup</p>
 		<p class=text>Défini le message du jour</p>
@@ -121,7 +121,7 @@ ip nat inside source static tcp 10.0.0.2 80 202.0.5.1 80
 		<!--vlan-->
 		<h3 id="vlan"><a href="#vlan">#</a> Configurations spécifiques aux vlan (config-if)</h3>
 		<p class=text>Défini le mode du vlan<p>
-		<p class=code>switchport mode &lt;access|trunk&gt;</p>
+		<p class=code>switchport mode (access|trunk)</p>
 		<p class=text>Défini le vlan pour l'interface<p>
 		<p class=code>switchport access vlan &lt;vlan&gt;</p>
 		<p class=text>Définir le vlan natif (celui pour lequel on ne modifie pas la trame entre plusieurs switch)<p>
