@@ -104,7 +104,7 @@ ip nat inside source static tcp 10.0.0.2 80 202.0.5.1 80
 		<p class=text>Place une liste d'accès sur telnet/ssh</p>
 		<p class="code counter">(config)# line vty &lt;start&gt; &lt;end&gt;</p>
 		<p class="code counter">(config-if)# access-class &lt;n°&gt; (in|out)</p>
-		<p class="text">Supprime une liste d'accès (il n'est pas possible de ne retirer qu'une règle</p>
+		<p class="text">Supprime une liste d'accès (il n'est pas possible de ne retirer qu'une règle)</p>
 		<p class="code">no access-list &lt;n°&gt;</p>
 		<p class="text">Crée une liste d'accès étendue</p>
 		<p class="code">access-list number filter protocol source dest en-queue</p>
@@ -131,14 +131,14 @@ ip nat inside source static tcp 10.0.0.2 80 202.0.5.1 80
 		<p class=text>N'autorise qu'un certain nombre d'adresse mac pour cette interface<p>
 		<p class=code>switchport port-security maximum &lt;nombre&gt;</p>
 		<p class=text>Défini l'adresse mac autorisée ou avec <span class=code>sticky</span> la 1e à se connecter<p>
-		<p class=code>switchport port-security mac-address &lt;&lt;mac-address&gt;|sticky&gt;</p>
+		<p class=code>switchport port-security mac-address (&lt;mac-address&gt;|sticky)</p>
 		<p class=text>Défini l'action à entreprendre si un port non-autorisé se connect</p>
 		<ul>
 			<li><span class=code>protect</span>: bloque les trames</li>
 			<li><span class=code>restrict</span>: bloque les trames et enregistre un message dans les logs</li>
 			<li><span class=code>shutdown</span>: met l'interface en mode <span class=code>administratively down</span>, un admin réseau devra <span class=code>no shutdown</span> celle-ci pour qu'elle puisse de nouveau être utilisée</li>
 		</ul>
-		<p class=code>switchport port-security violation protect|restrict|shutdown</p>
+		<p class=code>switchport port-security violation (protect|restrict|shutdown)</p>
 		
 		<!--config-line-->
 		<h2 id="config-line"><a href="#config-line">#</a> Commandes sur la configuration du vty (config-line)</h2>
