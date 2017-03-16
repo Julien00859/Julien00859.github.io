@@ -90,6 +90,20 @@ ip nat inside source static tcp 10.0.0.2 80 202.0.5.1 80
 		<p class=code>vlan &lt;vlan&gt;</p>
 		<p class=text>Utilise le protocol de routage RIP</p>
 		<p class=code>router rip</p>
+		<!--acl-->
+		<h3 id="acl"><a href="#acl">#</a> Access-list (config)</h2>
+		<p class=text>Défini une liste d'accès pour un hôte précis</p>
+		<p class=code>access-list &lt;n°&gt; (permit|deny) host &lt;ip&gt;</p>
+		<p class=text>Défini une liste d'accès pour un réseau</p>
+		<p class=code>access-list &lt;n°&gt; (permit|deny) network &lt;net&gt; &lt;wildcard&gt;</p>
+		<p class=text>Défini une liste d'accès pour tout le monde</p>
+		<p class=code>access-list &lt;n°&gt; (permit|deny) any</p>
+		<p class=text>Place une liste d'accès sur une interface</p>
+		<p class="code counter">(config)# interface &lt;interface&gt;</p>
+		<p class="code counter">(config-if)# ip access-group &lt;n°&gt; (in|out)</p>
+		<p class=text>Place une liste d'accès sur telnet/ssh</p>
+		<p class="code counter">(config)# line vty &lt;start&gt; &lt;end&gt;</p>
+		<p class="code counter">(config-if)# access-class &lt;n°&gt; (in|out)</p>
 		
 		<!--config-if-->
 		<h2 id="config-if"><a href="#config-if">#</a> Commandes sur la configuration des terminaux (config-if)</h2>
@@ -120,21 +134,6 @@ ip nat inside source static tcp 10.0.0.2 80 202.0.5.1 80
 			<li><span class=code>shutdown</span>: met l'interface en mode <span class=code>administratively down</span>, un admin réseau devra <span class=code>no shutdown</span> celle-ci pour qu'elle puisse de nouveau être utilisée</li>
 		</ul>
 		<p class=code>switchport port-security violation protect|restrict|shutdown</p>
-		
-		<!--acl-->
-		<h2 id="acl"><a href="#acl">#</a> Access-list (config)</h2>
-		<p class=text>Défini une liste d'accès pour un hôte précis</p>
-		<p class=code>access-list &lt;n°&gt; (permit|deny) host &lt;ip&gt;</p>
-		<p class=text>Défini une liste d'accès pour un réseau</p>
-		<p class=code>access-list &lt;n°&gt; (permit|deny) network &lt;net&gt; &lt;wildcard&gt;</p>
-		<p class=text>Défini une liste d'accès pour tout le monde</p>
-		<p class=code>access-list &lt;n°&gt; (permit|deny) any</p>
-		<p class=text>Place une liste d'accès sur une interface</p>
-		<p class="code counter">(config)# interface &lt;interface&gt;</p>
-		<p class="code counter">(config-if)# ip access-group &lt;n°&gt; (in|out)</p>
-		<p class=text>Place une liste d'accès sur telnet/ssh</p>
-		<p class="code counder">(config)# line vty &lt;start&gt; &lt;end&gt;</p>
-		<p class="code counter">(config-if)# access-class &lt;n°&gt; (in|out)</p>
 		
 		<!--config-line-->
 		<h2 id="config-line"><a href="#config-line">#</a> Commandes sur la configuration du vty (config-line)</h2>
