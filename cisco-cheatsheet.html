@@ -90,6 +90,8 @@ ip nat inside source static tcp 10.0.0.2 80 202.0.5.1 80
 		<p class=code>vlan &lt;vlan&gt;</p>
 		<p class=text>Utilise le protocol de routage RIP</p>
 		<p class=code>router rip</p>
+		<p class=text>Ajouter une access-list</p>
+		<p class=code>access-list &lt;n°&gt; (permit|deny) (host &lt;ip&gt;|network &lt;net&gt; &lt;wildcard&gt;|any)</p>
 		
 		<!--config-if-->
 		<h2 id="config-if"><a href="#config-if">#</a> Commandes sur la configuration des terminaux (config-if)</h2>
