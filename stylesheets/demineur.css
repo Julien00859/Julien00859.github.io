@@ -66,18 +66,18 @@ h1 {
 }
 
 /* Background-images for flags, mines and numbers */
-.blackFlag { background-image: url("imgs/blackFlag.svg"); }
-.redFlag { background-image: url("imgs/redFlag.svg"); }
-.blackMine { background-image: url("imgs/blackMine.svg"); }
-.redMine { background-image: url("imgs/redMine.svg"); }
-.num1 { background-image: url("imgs/num1.svg"); }
-.num2 { background-image: url("imgs/num2.svg"); }
-.num3 { background-image: url("imgs/num3.svg"); }
-.num4 { background-image: url("imgs/num4.svg"); }
-.num5 { background-image: url("imgs/num5.svg"); }
-.num6 { background-image: url("imgs/num6.svg"); }
-.num7 { background-image: url("imgs/num7.svg"); }
-.num8 { background-image: url("imgs/num8.svg"); }
+.blackFlag { background-image: url("../assets/blackFlag.svg"); }
+.redFlag { background-image: url("../assets/redFlag.svg"); }
+.blackMine { background-image: url("../assets/blackMine.svg"); }
+.redMine { background-image: url("../assets/redMine.svg"); }
+.num1 { background-image: url("../assets/num1.svg"); }
+.num2 { background-image: url("../assets/num2.svg"); }
+.num3 { background-image: url("../assets/num3.svg"); }
+.num4 { background-image: url("../assets/num4.svg"); }
+.num5 { background-image: url("../assets/num5.svg"); }
+.num6 { background-image: url("../assets/num6.svg"); }
+.num7 { background-image: url("../assets/num7.svg"); }
+.num8 { background-image: url("../assets/num8.svg"); }
 
 /* fadein animation */
 keyframes fadein {
