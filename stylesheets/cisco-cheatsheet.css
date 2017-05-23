@@ -1,0 +1,27 @@
+body {
+	font-family: Roboto;
+	padding: 0.1em;
+	margin-bottom: 5em;
+}
+a {
+	text-decoration: none;
+}
+.text {
+	counter-reset: line;
+	text-indent: 1em;
+}
+.code {
+	font-family: "Roboto Mono";
+	background-color: #efefef;
+	text-indent: 2em;
+	margin: 0;
+}
+.counter:before {
+	border-right: 1px solid #ddd;
+	counter-increment: line;
+	content: counter(line);
+	padding: 0 .5em;
+	margin-right: .5em;
+	color: #333;
+	font-size: small;
+}

@@ -4,16 +4,25 @@
 	<meta charset="utf-8">
 	<title>Art</title>
 	<style type="text/css">
+		html {
+			height: 100%;
+		}
+		body {
+			display: flex;
+			flex-direction: column;
+			min-height: calc(100% - 20px);
+		}
+		form {
+			display: flex;
+			flex-direction: row;
+		}
 		input[type=number] {
 			display: inline-block;
 			width: 50px;
 		}
-		fieldset {
-			display: inline-block;
-			vertical-align: top;
-		}
-		canvas {
+		#canvasBox {
 			border: 1px solid black;
+			flex-grow: 1;
 		}
 		input[type=range]{
 			vertical-align: top;
@@ -21,98 +30,148 @@
 	</style>
 
 	<script type="text/javascript">
-
-		var angle, list, speed, lineWidth, width, height, currentId = 0
-		
-		var stored_angle, stored_pos_x, stored_pos_y;
+		const DOM = {};
+		const dim = {};
+		var renderId = 0;
 
 		function main() {
-			document.getElementById("frm").addEventListener("submit", draw);
-			document.getElementById("redraw").addEventListener("click", redraw);
+			// Set shortcut for dom elements
+			DOM.canvasBox = document.getElementById("canvasBox");
+			DOM.canvas = document.getElementById("canvas");
+			DOM.context = DOM.canvas.getContext("2d");
+			DOM.form = document.getElementById("frm");
+			DOM.drawButton = document.getElementById("draw");
+			DOM.stopButton = document.getElementById("stop");
+			DOM.clearButton = document.getElementById("clear");
+			DOM.rendering = document.getElementById("rendering");
+			DOM.randomlistbox = document.getElementById("randomlistbox");
+			DOM.randomangle = document.getElementById("randomangle");
 
-			document.getElementsByName("randomlist")[0].addEventListener("change", function(){
-				if (this.checked) document.getElementsByClassName("random")[0].removeAttribute("hidden");
-				else document.getElementsByClassName("random")[0].setAttribute("hidden", true);
+			// Add the event handlers
+			DOM.drawButton.addEventListener("click", draw);
+			DOM.stopButton.addEventListener("click", function(event){
+				DOM.rendering.textContent = "interrompu.";
+				renderId++; // Trick
 			});
+			DOM.clearButton.addEventListener("click", function(event){
+				console.log("Clear from 0 0 to", DOM.canvas.width, DOM.canvas.height);
+				DOM.context.clearRect(0, 0, DOM.canvas.width, DOM.canvas.height);
+			});
+			DOM.form.randomlist.addEventListener("change", function(event){
+				if (DOM.form.randomlist.checked) {
+					DOM.randomlistbox.removeAttribute("hidden");
+					DOM.form.list.setAttribute("readonly", true);
+				} else {
+					DOM.randomlistbox.setAttribute("hidden", true);
+					DOM.form.list.removeAttribute("readonly");
+				}
+			});
+			DOM.form.randomangle.addEventListener("change", function(event){
+				if (DOM.form.randomangle.checked) {
+					DOM.form.angle.setAttribute("readonly", true);
+				} else {
+					DOM.form.angle.removeAttribute("readonly");
+				}
+			});
+			DOM.form.angle.addEventListener("change", function(event){
+				DOM.form.startAngle.value = 0;
+				DOM.form.startAngle.max = this.value * 2 - 1;
+			})
 
-
-			if (document.getElementsByName("randomlist")[0].checked) document.getElementsByClassName("random")[0].removeAttribute("hidden");
-			else document.getElementsByClassName("random")[0].setAttribute("hidden", true);
-
-			width = document.body.clientWidth;
-			height = window.innerHeight - document.getElementById("frm").clientHeight - 40;
-			document.getElementById("canvas").width = width - 20;
-			document.getElementById("canvas").height = height * 2;
-			document.getElementsByName("centerx")[0].max = width - 20;
-			document.getElementsByName("centerx")[0].value = parseInt(width / 2);
-			document.getElementsByName("centery")[0].max = height * 2;
-			document.getElementsByName("centery")[0].value = parseInt(height / 2);
-
-			document.getElementsByName("generated")[0].value = "";
+			updateRange()
 		}
 
-		function drawNext(id, posx, posy, lastAngle, i) {
-			if (i == 0) {
-				stored_angle = lastAngle;
-				stored_pos_x = posx;
-				stored_pos_y = posy;
-			}
-			if (id == currentId) {
-				if (typeof i == "undefined") i = 0;
-				var ctx = document.getElementById("canvas").getContext("2d");
-				var nextAngle = lastAngle + Math.PI / angle * list[i % list.length];
-				var nextPosx = posx + Math.cos(nextAngle) * lineWidth;
-				var nextPosy = posy - Math.sin(nextAngle) * lineWidth;
-				ctx.moveTo(posx, posy);
-				ctx.lineTo(nextPosx, nextPosy)
-				ctx.stroke();
-				if (!(nextPosx == stored_pos_x && nextPosy == stored_pos_y && nextAngle == stored_angle))
-					setTimeout(drawNext, speed, id, nextPosx, nextPosy, nextAngle, ++i);
-			} else {
-				console.log(id, "stopped")
-			}
+		function updateRange() {
+			console.log("Resized to:", DOM.canvasBox.offsetWidth, DOM.canvasBox.offsetHeight);
+			DOM.form.centerx.max = DOM.canvasBox.offsetWidth - 10;
+			DOM.form.centerx.value = DOM.canvasBox.offsetWidth / 2 - 5;
+			DOM.form.centery.max = DOM.canvasBox.offsetHeight - 10;
+			DOM.form.centery.value = DOM.canvasBox.offsetHeight / 2 - 5;
+			DOM.canvas.width = DOM.canvasBox.offsetWidth - 10;
+			DOM.canvas.height = DOM.canvasBox.offsetHeight - 10;
 		}
 
 		function draw(event) {
-			var self = this;
-			var ctx = document.getElementById("canvas").getContext("2d");
-			ctx.clearRect(0, 0, width, height);
-			ctx.beginPath();
-			angle = self.randomangle.checked ? parseInt(Math.random() * 5) + 2 : +self.angle.value;
-			list = self.randomlist.checked ? new Array(+self.randomlistlength.value).fill(0).map(function(x){return parseInt(Math.random() * (angle + (self.spade.checked ? 1 : 0)))}) : JSON.parse(self.list.value);
-			speed = +self.speed.max - +self.speed.value;
-			lineWidth = +self.linewidth.value;
-			drawNext(++currentId, +self.centerx.value, +self.centery.value, 0);
-			self.generated.value = angle + ": " + JSON.stringify(list);
-			event.preventDefault();
+			const func = {};
+			func["id"] = ++renderId;
+			func["startx"] = +DOM.form.centerx.value;
+			func["starty"] = +DOM.form.centery.value;
+			func["lineLength"] = +DOM.form.lineLength.value;
+			func["timeout"] = DOM.form.frequency.max - DOM.form.frequency.value;
+			
+			if (DOM.form.randomangle.checked) {
+				func["angle"] = 2 + Math.floor(Math.random() * 7);
+				DOM.form.angle.value = func.angle;
+				DOM.form.randomangle.checked = false;
+			} else {
+				func["angle"] = +DOM.form.angle.value;
+			}
+			func.startAngle = (Math.PI * +DOM.form.startAngle.value / func.angle) % (2 * Math.PI) - Math.PI;
+			console.log(func.startAngle);
+
+			if (DOM.form.randomlist.checked) {
+				let spadeDelta = DOM.form.spade.checked ? 1 : 0;
+				func["list"] = new Array(+DOM.form.randomlistlength.value).fill(0).map(_ => Math.floor(Math.random() * (func["angle"] + spadeDelta)))
+				DOM.form.list.value = JSON.stringify(func.list);
+				DOM.form.randomlist.checked = false;
+			} else {
+				func["list"] = JSON.parse(DOM.form.list.value);
+			}
+
+			const rendering = {
+				"x": func.startx,
+				"y": func.starty,
+				"angle": Math.PI * +DOM.form.startAngle.value / func.angle,
+				"listIndex": 0
+			};
+
+			DOM.context.beginPath();
+			DOM.context.clearRect(0, 0, DOM.canvas.width, DOM.canvas.height);
+
+			console.log("Start rendering function", func);
+			DOM.rendering.textContent = "en cours...";
+			setTimeout(drawTrait, func.timeout, func, rendering);
 		}
 
-		function redraw(event) {
-			var ctx = document.getElementById("canvas").getContext("2d");
-			ctx.clearRect(0, 0, width, height);
-			ctx.beginPath();
+		function drawTrait(func, rendering) {
+			console.log(rendering);
+			if (func.id != renderId) {
+				console.log("Rendering halted", func.id, renderId);
+				return;
+			}
+			
+			DOM.context.moveTo(rendering.x, rendering.y);
+			rendering.angle = (rendering.angle + Math.PI * func.list[rendering.listIndex] / func.angle) % (Math.PI * 2);
+			rendering.x += func.lineLength * Math.cos(rendering.angle);
+			rendering.y += func.lineLength * Math.sin(rendering.angle);
+			DOM.context.lineTo(rendering.x, rendering.y);
+			DOM.context.stroke();
 
-			var form = document.getElementById("frm");
-			speed = +form.speed.max - +form.speed.value;
-			lineWidth = +form.linewidth.value;
-			drawNext(++currentId, +form.centerx.value, +form.centery.value, 0);
+			rendering.listIndex = (rendering.listIndex + 1) % func.list.length;
+			if (rendering.listIndex == 0 && safeEquals(rendering.x, func.startx) && safeEquals(rendering.y, func.starty) && safeEquals(rendering.angle > 0 ? rendering.angle - Math.PI : rendering.angle + Math.PI, func.startAngle)) {
+				console.log("Rendering over");
+				DOM.rendering.textContent = "Terminé !";
+				return;
+			}
+			setTimeout(drawTrait, func.timeout, func, rendering);
 		}
 
-
-		function stop() {
-			currentId++;
+		function safeEquals(x, y) {
+			return Math.abs(Math.abs(x) - Math.abs(y)) < 0.0000001;
 		}
 
+		window.addEventListener("load", main);
+		window.addEventListener("resize", updateRange);
 	</script>
 
 </head>
-<body onload="main()">
+<body>
 	<form id=frm>
 		<fieldset>
 			<legend>Formule</legend>
 			<p>
 				<label for=angle title="PI / x">Angle:</label>
-				<input type=number name=angle min=2 step=1 placeholder="4">
+				<input type=number name=angle min=2 step=1 value=4 placeholder="4">
 
 				<label for=randomangle title="Génère un angle aléatoire entre PI/2 et PI/6">Aléatoire ?</label>
 				<input type=checkbox name=randomangle>
@@ -124,7 +183,7 @@
 				<label for=randomlist title="Génère une séquence aléatoire de 'nombre' occurence en fonction de l'angle">Aléatoire ?</label>
 				<input type=checkbox name=randomlist>
 			</p>
-			<p class=random>
+			<p id="randomlistbox" hidden>
 				<label for=randomlistlength title="Le nmobre d'occurence dans la séquence générée">Longueur: </label>
 				<input type=number min=1 max=50 step=1 value=15 name=randomlistlength>
 
@@ -132,7 +191,9 @@
 				<input type=checkbox name=spade>
 			</p>
 			<p>
-				<input type=submit value="Dessiner">
+				<input type=button id=draw value="Dessiner">
+				<input type=button id=stop value="Arrêter">
+				<input type=button id=clear value="Vider">
 			</p>
 		</fieldset>
 		<fieldset>
@@ -145,20 +206,25 @@
 				<label for=centery>Ordonné de départ: </label>
 				<input type=range min=0 step=1 name=centery>
 			</p>
-
 			<p>
-				<label for=linewidth>Taille des traits: </label>
-				<input type=range min=1 max=100 step=5 value=50 name=linewidth>
+				<label for=startAngle>Angle de départ: </label>
+				<input type=range min=0 step=1 value=0 max=7 name=startAngle>
 			</p>
 			<p>
-				<label for=speed title="La vitesse du crayon">Vitesse: </label>
-				<input type=range name=speed min=0 max=100 step=10 value=50>
+				<label for=lineLength>Longueur des traits: </label>
+				<input type=range min=1 max=100 step=5 value=50 name=lineLength>
+			</p>
+			<p>
+				<label for=frequency title="La vitesse du crayon">Vitesse de rendu: </label>
+				<input type=range name=frequency min=0 max=100 step=10 value=50>
+			</p>
+			<p>
+				Rendu: <output id="rendering">Pas commencé.</output>
 			</p>
 		</fieldset>
-		<p>
-			<label for=generated>Actuelle: </label><input type=text readonly style="width: 350px" name=generated> <input type=button value="Redessiner" id=redraw>
-		</p>
 	</form>
-	<canvas id="canvas"></canvas>
+	<div id="canvasBox">
+		<canvas id="canvas"></canvas>
+	</div>
 </body>
 </html>

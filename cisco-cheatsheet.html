@@ -4,38 +4,10 @@
 		<meta charset="utf-8">
 		<title>Cisco Cheatsheet</title>
 		<link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
-		<style>
-			body {
-				font-family: Roboto;
-				padding: 0.1em;
-				margin-bottom: 5em;
-			}
-			a {
-				text-decoration: none;
-			}
-			.text {
-				counter-reset: line;
-				text-indent: 1em;
-			}
-			.code {
-				font-family: "Roboto Mono";
-				background-color: #efefef;
-				text-indent: 2em;
-				margin: 0;
-			}
-			.counter:before {
-				border-right: 1px solid #ddd;
-				counter-increment: line;
-				content: counter(line);
-				padding: 0 .5em;
-				margin-right: .5em;
-				color: #333;
-				font-size: small;
-			}
-		</style>
+		<link rel=stylesheet type=text/css href="stylesheets/cisco-cheatsheet.css">
 	</head>
 	<body>
-<!-- 
+<!--
 ip nat outside|inside
 ip nat source list 1 interface HigabitEthernet0/1 overload
 access-list 1 permit 10.0.0.0 0.0.0.255
@@ -49,7 +21,7 @@ ip nat inside source static tcp 10.0.0.2 80 202.0.5.1 80
 		<h2 id="dollar"><a href="#dollar">#</a> Commandes sur le terminal (&gt;)</h2>
 		<p class=text>Passe en mode admin<p>
 		<p class=code>enable<p>
-		
+
 		<!--#-->
 		<h2 id="hashtag"><a href="#hashtag">#</a> Commandes sur le terminal en admin (#)</h2>
 		<p class=text>Sauvegarder la configuration courante dans la configuration de démarrage<p>
@@ -64,7 +36,7 @@ ip nat inside source static tcp 10.0.0.2 80 202.0.5.1 80
 		<p class=code>do show run<p>
 		<p class=text>Entre dans la configuration de ce terminal<p>
 		<p class=code>configure terminal<p>
-		
+
 		<!--config-->
 		<h2 id="config"><a href="#config">#</a> Commandes sur la configuration du terminal (config)</h2>
 		<p class=text>Change le nom de l’appareil<p>
@@ -109,7 +81,7 @@ ip nat inside source static tcp 10.0.0.2 80 202.0.5.1 80
 		<p class="text">Crée une liste d'accès étendue</p>
 		<p class="code">access-list number filter protocol source dest en-queue</p>
 		<p class="code">access-list &lt;n°&gt; (permit|deny) (ip|icmp|udp|tcp) (&lt;network&gt; &lt;mask&gt;|host &lt;ip&gt;|any) (&lt;network&gt; &lt;mask&gt;|host &lt;ip&gt;|any) [(eq|lt|gt) &lt;port&gt;|&lt;icmp-command&gt;]</p>
-		
+
 		<!--config-if-->
 		<h2 id="config-if"><a href="#config-if">#</a> Commandes sur la configuration des terminaux (config-if)</h2>
 		<p class=text>Définie une adresse IP<p>
@@ -139,21 +111,21 @@ ip nat inside source static tcp 10.0.0.2 80 202.0.5.1 80
 			<li><span class=code>shutdown</span>: met l'interface en mode <span class=code>administratively down</span>, un admin réseau devra <span class=code>no shutdown</span> celle-ci pour qu'elle puisse de nouveau être utilisée</li>
 		</ul>
 		<p class=code>switchport port-security violation (protect|restrict|shutdown)</p>
-		
+
 		<!--config-line-->
 		<h2 id="config-line"><a href="#config-line">#</a> Commandes sur la configuration du vty (config-line)</h2>
 		<p class=text>Défini un mot de passe<p>
 		<p class=code>password &lt;password&gt;<p>
 		<p class=text>Autorise la connexion sur ce port<p>
 		<p class=code>login<p>
-		
+
 		<!--config-router-->
 		<h2 id="config-router"><a href="#config-router">#</a> Commandes pour la configuration des protocols de routage</h2>
 		<!--rip-->
 		<h3 id="rip"><a href="#rip">#</a> RIP</h3>
 		<p class=text>Utilise la version 2 du protocol</p>
 		<p class=code>version 2</p>
-		
+
 		<!--scripts-->
 		<h2 id="scripts"><a href="#scripts">#</a> Quelques scripts</h2>
 		<p class=text>Configurer SSH</p>

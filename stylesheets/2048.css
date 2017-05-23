@@ -1,0 +1,35 @@
+h1, p
+{
+	text-align: center;
+}
+.block
+{
+	margin: 10px auto;
+	border: 2px solid black;
+	border-collapse: collapse;
+}
+tr td
+{
+	border: 1px solid black;
+	width: 100px;
+	height: 100px;
+	text-align: center;
+	font-size: x-large;
+}
+
+#up
+{
+	background-color: #40e0d0;
+}
+#left
+{
+	background-color: #98fb98;
+}
+#down
+{
+	background-color: #ee82ee;
+}
+#right
+{
+	background-color: #f0e68c;
+}
