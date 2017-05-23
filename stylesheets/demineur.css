@@ -1,0 +1,102 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+html {
+	height: 100%;
+}
+body {
+	padding: 0.5em;
+	font-family: Verdana, Tahoma, sans-serif;
+	height: 100%;
+}
+h1 {
+	height: 2em;
+	padding: 0.1em 0;
+	text-align: center;
+}
+#config {
+	-webkit-animation: fadein 2s;
+	-moz-animation: fadein 2s;
+	-ms-animation: fadein 2s;
+	-o-animation: fadein 2s;
+	animation: fadein 2s;
+
+	display: fixed;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	background-color: white;
+	border: double black;
+	box-shadow: 0.2em 0.2em 0.5em black;
+	padding: 1em;
+}
+#table {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid white;
+	height: calc(100% - 4em);
+}
+.line {
+	flex: 1;
+	display: flex;
+	flex-direction: row;
+}
+.cell {
+	flex: 1;
+	font-family: monospace;
+	text-align: center;
+	min-width: 1.5em;
+	min-height: 1.5em;
+	border: 1px solid white;
+	background-color: lightgray;
+}
+.unrevealed, .unrevealed[data-flag]:hover {
+	background-color: darkgray;
+}
+.unrevealed:hover {
+	background-color: lightgray;
+}
+.blackFlag, .redFlag, .blackMine, .redMine, .num1, .num2, .num3, .num4, .num5, .num6, .num7, .num8 {
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+/* Background-images for flags, mines and numbers */
+.blackFlag { background-image: url("imgs/blackFlag.svg"); }
+.redFlag { background-image: url("imgs/redFlag.svg"); }
+.blackMine { background-image: url("imgs/blackMine.svg"); }
+.redMine { background-image: url("imgs/redMine.svg"); }
+.num1 { background-image: url("imgs/num1.svg"); }
+.num2 { background-image: url("imgs/num2.svg"); }
+.num3 { background-image: url("imgs/num3.svg"); }
+.num4 { background-image: url("imgs/num4.svg"); }
+.num5 { background-image: url("imgs/num5.svg"); }
+.num6 { background-image: url("imgs/num6.svg"); }
+.num7 { background-image: url("imgs/num7.svg"); }
+.num8 { background-image: url("imgs/num8.svg"); }
+
+/* fadein animation */
+keyframes fadein {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+@-moz-keyframes fadein {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+@-webkit-keyframes fadein {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+@-ms-keyframes fadein {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+@-o-keyframes fadein {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}

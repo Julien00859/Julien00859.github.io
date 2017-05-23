@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta charset=utf-8>
+		<link rel=stylesheet type=text/css href="stylesheets/demineur.css">
+		<script type=text/javascript src="scripts/demineur.js"></script>
+	</head>
+	<body onload="main();">
+		<h1>Démineur</h1>
+		<div id="table">
+
+		</div>
+		<form id="config">
+			<p>
+				<label for=width>Largeur: </label>
+				<input type=number min=10 step=1 name=width value=20>
+			</p>
+			<p>
+				<label for=height>Hauteur: </label>
+				<input type=number min=10 step=1 name=height value=15>
+			</p>
+			<p>
+				<label for=difficulty>Difficulté: </label>
+				<select name=difficulty>
+					<option value=0.05>Facile</option>
+					<option value=0.15 selected>Normal</option>
+					<option value=0.25>Difficile</option>
+					<option value=0.35>Très difficile</option>
+				</select>
+			</p>
+			<p>
+				<input type=submit value="Lancer la partie">
+			</p>
+		</form>
+	</body>
+</html>
