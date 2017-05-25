@@ -8,7 +8,7 @@ function IPv4(address, mask) {
 	if (mask < 0 || mask > 32) throw "Mask must be between 0 and 32";
 
 
-	var splitedAddress = address.split(".").map(parseInt);
+	var splitedAddress = address.split(".").map(x => parseInt(x));
 	this.address = 0;
 	for (var n=0; n<4; n++) {
 		if (splitedAddress[n] > 255) throw "Address values must be between 0 and 255";
