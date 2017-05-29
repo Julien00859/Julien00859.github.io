@@ -42,10 +42,6 @@ function main() {
 
 // Reveal a cell, maybe a bomb, maybe not !
 function reveal(cell, x, y) {
-	// If cell is flagged, cancel the event
-	if (cell.hasAttribute("data-flag") || cell.hasAttribute("data-number"))
-		return;
-
 	// If cell is a bomb, stop the game
 	if (cell.hasAttribute("data-mine")) {
 
@@ -78,9 +74,14 @@ function reveal(cell, x, y) {
 	let count = countAround(x, y);
 	cell.setAttribute("data-number", count);
 
+	// Adapt the events
+	cell.onclick = null;
+	cell.oncontextmenu = null;
+
 	// Some mines around ?
 	if (count > 0) {
-		// If so, flag the cell with the number
+		// If so, flag the cell with the number and add an event
+		cell.ondblclick = function() { revealAround(cell, x, y); };
 		cell.classList.add("num" + count);
 	} else {
 		// Otherwise discover cells around
@@ -106,14 +107,20 @@ function reveal(cell, x, y) {
 
 					freeCount--;
 
+					// Adapt the events
+					cell.onclick = null;
+					cell.oncontextmenu = null;
+
 					// Count around, flag the cell
 					count = countAround(xx, yy);
 					cell.classList.remove("unrevealed");
 					cell.setAttribute("data-number", count);
 
 					// Show the number or add the cell position to the queue
-					if (count > 0)
+					if (count > 0) {
+						cell.ondblclick = function() { revealAround(cell, xx, yy); };
 						cell.classList.add("num" + count);
+					}
 					else
 						queue.push([xx, yy]);
 				}
@@ -127,21 +134,32 @@ function reveal(cell, x, y) {
 	}
 }
 
+function revealAround(cell, x, y) {
+	for (let xx = Math.max(0, x-1); xx < Math.min(width, x+2); xx++) {
+		for (let yy = Math.max(0, y-1); yy < Math.min(height, y+2); yy++) {
+			if (xx == x && yy == y)
+				continue;
+
+			let cell = getCellAt(xx, yy);
+			if (!(cell.hasAttribute("data-flag") || cell.hasAttribute("data-number")))
+				reveal(cell, xx, yy);
+		}
+	}
+}
+
 // Flag of unflag a cell
 function flag(cell, x, y) {
-	// Revealed cells cannot be flagged
-	if (cell.hasAttribute("data-number"))
-		return;
-
 	// If cell is flagged
 	if (cell.hasAttribute("data-flag")) {
 		// Unflag
 		cell.removeAttribute("data-flag");
 		cell.classList.remove("blackFlag");
+		cell.onclick = function() { reveal(cell, x, y); };
 	} else {
 		// Flag
 		cell.setAttribute("data-flag", 1);
 		cell.classList.add("blackFlag");
+		cell.onclick = null;
 	}
 }
 
@@ -197,6 +215,7 @@ function removeMouseEvents() {
 	for (let line of tableNode.childNodes) {
 		for (let cell of line.childNodes) {
 			cell.onclick = null;
+			cell.ondblclick = null;
 			cell.oncontextmenu = null;
 		}
 	}
