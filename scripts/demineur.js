@@ -1,12 +1,31 @@
 // Node shortcut
 var configNode;
 var tableNode;
+var bestTimeNode;
 
 // Values of config form on submit
 var width;
 var height;
 var mineCount;
 var freeCount;
+var startTime;
+var bestTimes = JSON.parse(localStorage.getItem("bestTimes")) || {};
+
+function updateScore(newTime) {
+	let width = +configNode.width.value;
+	let height = +configNode.height.value;
+	let difficulty = +configNode.difficulty.value;
+	let id = width * height + "." + difficulty;
+
+	if (newTime != void 0) {
+		if (!(id in bestTimes) || newTime < bestTimes[id]) {
+			bestTimes[id] = newTime;
+			localStorage.setItem("bestTimes", JSON.stringify(bestTimes));
+		}
+	}
+
+	bestTimeNode.textContent = (id) in bestTimes ? (bestTimes[id] / 1000).toFixed(3) : "NaN";
+}
 
 function main() {
 	// Main function, called after page load
@@ -14,10 +33,19 @@ function main() {
 	// Shortcut to some nodes
 	configNode = document.getElementById("config");
 	tableNode = document.getElementById("table");
+	bestTimeNode = document.getElementById("bestTime");
+
+	updateScore();
 
 	// Record events
-	configNode.width.addEventListener("change", createField);
-	configNode.height.addEventListener("change", createField);
+	configNode.width.onchange = function() {
+		updateScore();
+		createField();
+	}
+	configNode.height.onchange = function() {
+		updateScore();
+		createField();
+	}
 
 	configNode.addEventListener("submit", event => {
 		// Cancel the submit
@@ -36,6 +64,7 @@ function main() {
 		addMouseEvents();
 
 		configNode.setAttribute("hidden", true);
+		startTime = new Date();
 	});
 	createField();
 }
@@ -129,6 +158,7 @@ function reveal(cell, x, y) {
 	}
 	if (!freeCount) {
 		// Game won ! Disable events and show menu in 1.5 sec
+		updateScore(new Date() - startTime);
 		removeMouseEvents();
 		setTimeout(function(){configNode.removeAttribute("hidden")}, 1500);
 	}

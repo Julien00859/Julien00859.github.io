@@ -3,6 +3,8 @@ var ctx;
 var music;
 var brwa;
 var score;
+var lastScore;
+var topScore;
 
 var CANVAS_HEIGTH = 400;
 var POSX = 25.0;
@@ -26,6 +28,15 @@ function main() {
 	music = document.getElementById("music");
 	brwa = document.getElementById("brwa");
 	score = document.getElementById("score");
+	lastScore = document.getElementById("last_score");
+	topScore = document.getElementById("top_score");
+
+	lastScore.textContent = "0";
+	if (localStorage !== void 0)
+		topScore.textContent = localStorage.getItem("score");
+	else
+		topScore.textContent = "0";
+
 	start()
 }
 
@@ -99,6 +110,12 @@ function update() {
 		music.pause();
 		brwa.play();
 		window.addEventListener("keypress", start, false);
+		lastScore.textContent = score.textContent;
+		if (+score.textContent > +topScore.textContent) {
+			if (localStorage !== void 0)
+				localStorage.setItem("score", score.textContent);
+			topScore.textContent = score.textContent;
+		}
 	}
 }
 
