@@ -1,0 +1,42 @@
+body {
+    margin: 0.2em 5em;;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#sudoku {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto;
+    width: calc(9 * 3em);
+    height: calc(9 * 3em);
+    justify-content: stretch;
+    align-content: stretch;
+}
+
+.sudoku-block {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto;
+    width: calc(3 * 3em);
+    height: calc(3 * 3em);
+    justify-content: stretch;
+    align-content: stretch;
+    justify-self: stretch;
+    align-self: stretch;
+}
+
+.sudoku-block:nth-child(2n) {
+    background-color: lemonchiffon;
+}
+
+.sudoku-cell {
+    width: 3em;
+    height: 3em;
+    justify-self: stretch;
+    align-self: stretch;
+    text-align: center;
+    border: 1px solid black;
+}
