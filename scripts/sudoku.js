@@ -10,11 +10,9 @@ function setCellValue(cell, value) {
 }
 
 function main() {
-    grid = document.getElementsByClassName("sudoku-cell");
-    console.log(grid);
     generateGrid(document.getElementById("sudoku-grid"));
+    grid = document.getElementsByClassName("sudoku-cell");
     visualize(generateSudoku());
-    console.log(grid);
 }
 
 function visualize(sudoku) {
@@ -37,7 +35,6 @@ function generateGrid(container) {
             cell.classList.add("sudoku-cell");
             block.appendChild(cell);
         }
-        console.log(grid);
         container.appendChild(block);
     }
 }
