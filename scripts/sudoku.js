@@ -1,7 +1,8 @@
 let grid;
+let cells;
 
 function getCellAt(blockNo, cellNo) {
-    return grid[blockNo * 9 + cellNo];
+    return cells[blockNo * 9 + cellNo];
 }
 
 function setCellValue(cell, value) {
@@ -10,9 +11,11 @@ function setCellValue(cell, value) {
 }
 
 function main() {
-    generateGrid(document.getElementById("sudoku-grid"));
-    grid = document.getElementsByClassName("sudoku-cell");
+    grid = document.getElementById("sudoku-grid");
+    generateGrid(grid);
+    cells = document.getElementsByClassName("sudoku-cell");
     visualize(generateSudoku());
+    removeNumbers();
 }
 
 function visualize(sudoku) {
@@ -67,4 +70,16 @@ function generateSudoku() {
         }
     }
     return sudoku;
+}
+
+
+function removeNumbers() {
+    const seed = _.shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    for (let idx in seed) {
+        const toDeletes = _.sample(grid.querySelectorAll(`[data-value="${seed[idx]}"]`), Number(idx) + 1);
+        for (let toDel of toDeletes) {
+            toDel.dataset.user = true;
+            toDel.firstChild.firstChild.nodeValue = "";
+        }
+    }
 }
