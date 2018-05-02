@@ -1,9 +1,198 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Julien Castiaux - Portfolio</title>
+	<title>Julien Castiaux - CV</title>
 	<meta charset=utf-8>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet" type="text/css" />
+	<link rel=stylesheet href="styles.css">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+	<script>
+		window.onload = _ => {
+			const teacherProofs = document.getElementsByClassName("teacherproof");
+			const checkox = document.getElementById("ephec");
+			checkox.checked = false;
+			checkox.onchange = evt => {
+				if (evt.target.checked)
+					for (let i = 0; i < teacherProofs.length; i++)
+						teacherProofs[i].setAttribute("hidden", "true");
+				else
+					for (let i = 0; i < teacherProofs.length; i++)
+						teacherProofs[i].removeAttribute("hidden");
+			}
+		}
+	</script>
 </head>
 <body>
-	
+	<header>
+		<h1><a href="index.html">Julien Castiaux</a></h1>
+		<nav>
+			<input type=checkbox id=ephec>
+			<label for=ephec>Je suis prof</label>
+			<a href="cv.html">Résumé</a>
+			<a href="portfolio.html">Portfolio</a>
+			<a href="#">Best of</a>
+		</nav>
+	</header>
+	<hr>
+	<main>
+		<section>
+			<h2>En cours</h2>
+			<article>
+				<header>
+					<h3>Webgames</h3>
+					<aside><i class="fas fa-spinner fa-pulse"></i> Travail de fin d'étude</aside>
+				</header>
+			</article>
+			<article>
+				<header>
+					<h3>sudoku.rs</h3>
+					<aside><i class="fas fa-spinner fa-pulse"></i> Jeu</aside>
+				</header>
+			</article>
+			<article>
+				<header>
+					<h3>Salon des Développeurs</h3>
+					<aside><i class="fas fa-child"></i> Communauté en ligne</aside>
+				</header>
+			</article>
+
+			<h2>2018</h2>
+			<article>
+				<header>
+					<h3>Robotik-B33R</h3>
+					<aside><i style="color: green" class="fa fa-check-circle"></i> Collaboration</aside>
+				</header>
+			</article>
+
+			<h2>2017</h2>
+			<article>
+				<header>
+					<h3>sudoku.js</h3>
+					<aside><i style="color: red" class="fa fa-times-circle"></i> Jeu</aside>
+				</header>
+			</article>
+			<article>
+				<header>
+					<h3>mines.js</h3>
+					<aside><i style="color: green" class="fa fa-check-circle"></i> Jeu</aside>
+				</header>
+			</article>
+			<article>
+				<header>
+					<h3>TheNumberOne</h3>
+					<aside><i style="color: green" class="fa fa-check-circle"></i> Projet perso</aside>
+				</header>
+			</article>
+			<article>
+				<header>
+					<h3>2048.js</h3>
+					<aside><i style="color: green" class="fa fa-check-circle"></i> Jeu</aside>
+				</header>
+			</article>
+			<article>
+				<header>
+					<h3>Webbash</h3>
+					<aside><i style="color: green" class="fa fa-check-circle"></i> Projet perso</aside>
+			</article>
+
+			<h2>2016</h2>
+			<article>
+				<header>
+					<h3>jumpit.js</h3>
+					<aside><i style="color: green" class="fa fa-check-circle"></i> Jeu</aside>
+				</header>
+			</article>
+			<article>
+				<header>
+					<h3>art.js</h3>
+					<aside><i style="color: green" class="fa fa-check-circle"></i> Projet perso</aside>
+				</header>
+			</article>
+			<article>
+				<header>
+					<h3>Whist</h3>
+					<aside><i style="color: gold" class="fa fa-minus-circle"></i> Projet perso</aside>
+				</header>
+			</article>
+			<article>
+				<header>
+					<h3>WebIRC</h3>
+					<aside><i style="color: green" class="fa fa-check-circle"></i> Collaboration</aside>
+				</header>
+			</article>
+
+			<h2>2015</h2>
+			<article>
+				<header>
+					<h3>network.js</h3>
+					<aside><i style="color: green" class="fa fa-check-circle"></i> Outil</aside>
+				</header>
+			</article>
+			<article>
+				<header>
+					<h3>pong.js</h3>
+					<aside><i style="color: green" class="fa fa-check-circle"></i> Jeu</aside>
+				</header>
+			</article>
+			<article>
+				<header>
+					<h3>Live-coding</h3>
+					<aside><i style="color: red" class="fa fa-times-circle"></i> Projet perso</aside>
+				</header>
+			</article>
+			<article class="teacherproof">
+				<header>
+					<h3>2018.js</h3>
+					<aside><i style="color: green" class="fa fa-check-circle"></i> Jeu</aside>
+				</header>
+			</article>
+			<article class="teacherproof">
+				<header>
+					<h3>BotIRC</h3>
+					<aside><i style="color: green" class="fa fa-check-circle"></i> Projet perso</aside>
+				</header>
+			</article>
+			<article class="teacherproof">
+				<header>
+					<h3>Peer-to-Text</h3>
+					<aside><i style="color: red" class="fa fa-times-circle"></i> Collaboration</aside>
+				</header>
+			</article>
+
+			<h2 class="teacherproof">2014</h2>
+			<article class="teacherproof">
+				<header>
+					<h3>MCBin</h3>
+					<aside><i style="color: green" class="fa fa-check-circle"></i> Collaboration</aside>
+				</header>
+			</article>
+
+			<article class="teacherproof">
+				<header>
+					<h3>Devbukkit</h3>
+					<aside><i class="fas fa-child"></i> Communauté en ligne&nbsp; &nbsp;<i style="color: green" class="fa fa-check-circle"></i> Collaboration</aside>
+				</header>
+				2013-2014
+			</article>
+
+			<article class="teacherproof">
+				<header>
+					<h3>Bukkit France</h3>
+					<aside><i class="fas fa-child"></i> Communauté en ligne</aside>
+				</header>
+				2012-2014
+			</article>
+
+			<h2 class="teacherproof">2013</h2>
+			<article class="teacherproof">
+				<header>
+					<h3>Minecraft Belgique</h3>
+					<aside><i class="fas fa-child"></i> Communauté en ligne&nbsp; &nbsp;<i style="color: green" class="fa fa-check-circle"></i> Projet perso</aside>
+				</header>
+				2011-2013
+			</article>
+		</section>
+	</main>
+	<footer></footer>
 </body>
+</html>

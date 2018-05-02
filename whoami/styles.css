@@ -8,6 +8,9 @@ header {
 	justify-content: space-between;
 	align-items: baseline;
 }
+article header {
+	align-items: center;
+}
 main {
 	max-width: 40em;
 	margin: 0 auto;
@@ -27,6 +30,9 @@ h1 {
 }
 h2 {
 	text-align: center
+}
+h3 {
+	text-decoration: underline;
 }
 
 footer {
