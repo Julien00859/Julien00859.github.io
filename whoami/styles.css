@@ -34,7 +34,24 @@ h2 {
 h3 {
 	text-decoration: underline;
 }
-
 footer {
 	min-height: 5em;
+}
+
+@media print {
+	header nav, footer {
+		display: none;
+	}
+	h2 {
+		text-align: initial;
+	}
+	h2:first-child {
+		page-break-after: avoid;
+	}
+	article:first-of-type {
+		page-break-before: avoid;
+	}
+	article, .fa-ul li {
+		page-break-inside: avoid;
+	}
 }
