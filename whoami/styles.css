@@ -70,14 +70,14 @@ footer {
 	}
 }
 
-#bigimg-div {
+#bigimg-div, #bigvid-div {
 	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
 
-img.thumbnail {
+img.thumbnail, img.video-thumbnail {
 	cursor: zoom-in;
 }
 

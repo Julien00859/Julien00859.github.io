@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Julien Castiaux - CV</title>
+	<title>Julien Castiaux - Projets</title>
 	<meta charset=utf-8>
     <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet" type="text/css" />
 	<link rel=stylesheet href="styles.css">
@@ -9,11 +9,14 @@
 	<script>
 		window.onload = _ => {
 			const bigimgdiv = document.getElementById("bigimg-div");
+			const bigviddiv = document.getElementById("bigvid-div");
+			console.log(bigviddiv)
 			const bigimg = document.getElementById("bigimg");
-			console.log(bigimgdiv)
-			console.log(bigimg)
 			bigimgdiv.onclick = _ => {
 				bigimgdiv.setAttribute("hidden", "true");
+			}
+			bigviddiv.onclick = _ => {
+				bigviddiv.setAttribute("hidden", "true");
 			}
 			const thumbnails = document.getElementsByClassName("thumbnail");
 			Array.prototype.forEach.call(thumbnails, ele => {
@@ -21,6 +24,20 @@
 					src = ele.getAttribute("src").replace("-thumbnail", "");
 					bigimg.setAttribute("src", src);
 					bigimgdiv.removeAttribute("hidden");
+				}
+			})
+			const thumbnails_vid = document.getElementsByClassName("video-thumbnail");
+			Array.prototype.forEach.call(thumbnails_vid, ele => {
+				ele.onclick = _ => {
+					src = (/https:\/\/img\.youtube\.com\/vi\/(.*?)\/0\.jpg/).exec(ele.getAttribute("src"))[1];
+					console.log(src)
+					bigviddiv.innerHTML = `<iframe width="720" height="405" src="https://www.youtube.com/embed/${src}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
+					bigviddiv.removeAttribute("hidden");
+					setTimeout(function() {window.onclick = _ => {
+						window.onclick = null;
+						bigviddiv.removeChild(bigviddiv.firstChild);
+						bigviddiv.setAttribute("hidden", "true");
+					}}, 0)
 				}
 			})
 		}
@@ -47,12 +64,54 @@
 				</header>
 				<p></p>
 			</article>
+			
 			<article>
 				<header>
-					<h3>sudoku.rs</h3>
+					<h3><a href="https://github.com/Julien00859/sudokurs" target=_blank>sudoku.rs</a></h3>
 					<p><i class="fas fa-spinner fa-pulse"></i> Jeu</p>
 				</header>
+				<p>Implémentation du jeu du sudoku en Rust pour apprendre le langage et les mathématiques associées à la création d'un jeu de sukoku</p>
+				<p>Pour le moment uniquement la génération d'une grille complète a été implémenté.</p>
+				<aside>
+<code><pre>
+$ ./sudokurs
+2 8 5 6 9 3 7 4 1
+1 7 4 5 8 2 6 3 9
+3 9 6 7 1 4 8 5 2
+4 1 7 8 2 5 9 6 3
+6 3 9 1 4 7 2 8 5
+5 2 8 9 3 6 1 7 4
+7 4 1 2 5 8 3 9 6
+9 6 3 4 7 1 5 2 8
+8 5 2 3 6 9 4 1 7
+</pre></code>
+<code><pre>
+$ ./sudokurs
+3 9 6 7 4 1 2 5 8
+1 7 4 5 2 8 9 3 6
+2 8 5 6 3 9 1 4 7
+5 2 8 9 6 3 4 7 1
+6 3 9 1 7 4 5 8 2
+4 1 7 8 5 2 3 6 9
+7 4 1 2 8 5 6 9 3
+9 6 3 4 1 7 8 2 5
+8 5 2 3 9 6 7 1 4
+</pre></code>
+<code><pre>
+$ ./sudokurs
+3 9 6 4 7 1 8 2 5
+1 7 4 2 5 8 6 9 3
+2 8 5 3 6 9 7 1 4
+5 2 8 6 9 3 1 4 7
+6 3 9 7 1 4 2 5 8
+4 1 7 5 8 2 9 3 6
+7 4 1 8 2 5 3 6 9
+9 6 3 1 4 7 5 8 2
+8 5 2 9 3 6 4 7 1
+</pre></code>
+				</aside>
 			</article>
+			
 			<article id="sdd">
 				<header>
 					<h3>Salon des Développeurs</h3>
@@ -70,6 +129,7 @@
 					<img class="thumbnail" src="img/sdd_python.png" width="25%" height="25%">
 				</aside>
 			</article>
+			
 
 			<h2>2018 - 21 ans</h2>
 			<article>
@@ -77,54 +137,98 @@
 					<h3>Robotik-B33R</h3>
 					<p><i style="color: green" class="fa fa-check-circle"></i> Collaboration</p>
 				</header>
+				<p>Projet réalisé durant hackathon organisé par le Microsoft Inovation Center, l'objectif était d'améliorer l'espace de travail.</p>
+				<p>Avec mon groupe nous avons décidé de faire une application pour commander des bières au bar, nous avons entrainé une IA pour reconnaitre et différentier différentes marques et programmé un bras articuler pour attraper la bière voulue et la déposer sur le contoire.</p>
+				<aside>
+					<img class="thumbnail" src="img/hackathon_mic_1.jpg" width=33%>
+					<img class="thumbnail" src="img/hackathon_mic_2.jpg" width=33%>
+					<img class="thumbnail" src="img/hackathon_mic_3.jpg" width=33%>
+					<img class="video-thumbnail" src="https://img.youtube.com/vi/Fr-jgnljfug/0.jpg" width=33%>
+					<img class="video-thumbnail" src="https://img.youtube.com/vi/H416N37ehCc/0.jpg" width=33%>
+					<img class="video-thumbnail" src="https://img.youtube.com/vi/AZZu3EtLtnM/0.jpg" width=33%>
+					
+				</aside>
 			</article>
-
+			
 			<article id="python-meetups">
 				<header>
 					<h3><a href="https://www.meetup.com/Belgium-Python-Meetup-aka-AperoPythonBe/events/247130091/">Belgium Python Meetups</a></h3>
 					<p><i class="far fa-comments"></i> Rencontre</p>
 				</header>
+				<p>Rencontre à Bruxelles avec des développeurs Python dont je ne garde pas un bon souvenir. J'étais le seul développeur web de la salle et des petits groupes se sont très rapidement formés: d'un coté les ops qui utilisaient python via Ansible, de l'autre des scientifiques qui utilisaient python pour du big-data et du machine learning et quelques paumés perdu au centre qui avaient codé en python "il y a longtemps".</p>
 			</article>
+			
+
 			<h2>2017 - 20 ans</h2>
+			<article id="webgames-legacy">
+				<header>
+					<h3><a href="https://github.com/Julien00859/Webgames-legacy" target=_blank>Webgames-legacy</a></h3>
+					<p><i style="color: gold" class="fa fa-minus-circle"></i> Collaboration</p>
+				</header>
+				<p><a href=#webgames>Voir la description de Webgames</a></p>
+				<p>La version originale était une implémentation du jeu Bomberman dans le navigateur (mon ami Mathieu Rousseau s'étant occupé de tout le front-end), ce projet a dérivé sur l'exploration de différentes bibliothèques de gestion de la concurence en python (multi-threading, multi-processing) et de la toute jeune bibliothèque asyncio (modèle réseau asynchrone) et des jeunes frameworks web qui en découlaient (aiohttp et sanic)</p>
+				<p>Chaque version m'était l'accent sur une partie précise, tantôt l'optimisation des jeux vidéos, tantôt la sécurité de l'app, tantôt la haute disponibilité. Au final j'ai décidé de finir ce projet seul via mon travail de fin d'étude.</p>
+			</article>
+			
 			<article>
 				<header>
 					<h3>sudoku.js</h3>
 					<p><i style="color: red" class="fa fa-times-circle"></i> Jeu</p>
 				</header>
 			</article>
+			
 			<article id="devrant-meetup">
 				<header>
-					<h3><a href="https://devrant.com/rants/1089393/here-are-all-the-infos-for-this-friday-night-meeting-friday-22-12-6pm-brussels-c">Devrant Meetup</a></h3>
+					<h3><a href="https://devrant.com/rants/1089393/here-are-all-the-infos-for-this-friday-night-meeting-friday-22-12-6pm-brussels-c" target=_blank>Devrant Meetup</a></h3>
 					<p><i class="far fa-comments"></i> Rencontre</p>
 				</header>
 				<aside>
 					<img src="img/devrant_meetup.png">
 				</aside>
+				<p>Rencontre avec plusieurs Belges de la plateforme Devrant. On a bu des bières, mangé un bon burger et discuté IT. C'était très chouette d'enfin rencontrer ces pseudonymes et de discuter avec eux. Je garde un souvenir particulier de Condor avec qui j'ai discuté serveurs mails linux toute la soirée.</p>
 			</article>
+			
 			<article>
 				<header>
-					<h3>mines.js</h3>
+					<h3><a href="http://julien00859.github.io/demineur.html" target=_blank>demineur.js</a></h3>
 					<p><i style="color: green" class="fa fa-check-circle"></i> Jeu</p>
 				</header>
+				<p>Petit jeu de démineur implémenté d'abord via ncurses avec python et puis transposé en web.</p>
+				<aside>
+					<img class="thumbnail" src="img/demineur_py.png" width="33%">
+					<img class="thumbnail" src="img/demineur.png" width="33%">
+				</aside>
 			</article>
-			<article>
+			
+			<article id="botdiscord">
 				<header>
-					<h3>TheNumberOne</h3>
+					<h3><a href="https://github.com/Julien00859/BotDiscord" target=_blank>BotDiscord</a></h3>
 					<p><i style="color: green" class="fa fa-check-circle"></i> Projet perso</p>
 				</header>
+				<p>Bot pour le chat Discord qui a été réaliser pour faciliter le changement d'année. Sur le discord ephec-ti (dont j'étais l'administrateur), chaque étudient était placé dans un groupe selon sa classe, les permissions d'accès aux salons de discussion étant définis sur le groupe et pas sur les utilisateurs directement. Avec la nouvelle année changer tout le monde de classe était hyper chiant, j'ai donc créé un bot qui le faisait à notre place. Ensuite des petites fonctionnalités sympatiques se sont ajoutées.</p>
+				<aside>
+					<img class="thumbnail" src="img/the_number_one_1.png" width=33%>
+					<img class="thumbnail" src="img/the_number_one_2.png" width=33%>
+				</aside>
 			</article>
+			
 			<article id="devday">
 				<header>
 					<h3><a href="http://www.devday.be/">Dev Day Mons 2017</a></h3>
 					<p><i class="far fa-comments"></i> Rencontre</p>
 				</header>
+				<aside>
+					<img src="img/devday.png">
+				</aside>
 			</article>
+			
 			<article>
 				<header>
 					<h3>2048.rs</h3>
 					<p><i style="color: green" class="fa fa-check-circle"></i> Jeu</p>
 				</header>
 			</article>
+			
 			<article>
 				<header>
 					<h3>Webbash</h3>
@@ -138,24 +242,28 @@
 					<p><i style="color: green" class="fa fa-check-circle"></i> Jeu</p>
 				</header>
 			</article>
+			
 			<article>
 				<header>
 					<h3>art.js</h3>
 					<p><i style="color: green" class="fa fa-check-circle"></i> Projet perso</p>
 				</header>
 			</article>
+			
 			<article>
 				<header>
 					<h3>Whist</h3>
 					<p><i style="color: gold" class="fa fa-minus-circle"></i> Projet perso</p>
 				</header>
 			</article>
+			
 			<article>
 				<header>
 					<h3>WebIRC</h3>
 					<p><i style="color: green" class="fa fa-check-circle"></i> Collaboration</p>
 				</header>
 			</article>
+			
 
 			<h2>2015 - 18 ans</h2>
 			<article>
@@ -164,36 +272,42 @@
 					<p><i style="color: green" class="fa fa-check-circle"></i> Outil</p>
 				</header>
 			</article>
+			
 			<article>
 				<header>
 					<h3>pong.js</h3>
 					<p><i style="color: green" class="fa fa-check-circle"></i> Jeu</p>
 				</header>
 			</article>
+			
 			<article>
 				<header>
 					<h3>Live-coding</h3>
 					<p><i style="color: red" class="fa fa-times-circle"></i> Projet perso</p>
 				</header>
 			</article>
+			
 			<article>
 				<header>
 					<h3>2018.js</h3>
 					<p><i style="color: green" class="fa fa-check-circle"></i> Jeu</p>
 				</header>
 			</article>
+			
 			<article>
 				<header>
 					<h3>BotIRC</h3>
 					<p><i style="color: green" class="fa fa-check-circle"></i> Projet perso</p>
 				</header>
 			</article>
+			
 			<article>
 				<header>
 					<h3>Peer-to-Text</h3>
 					<p><i style="color: red" class="fa fa-times-circle"></i> Collaboration</p>
 				</header>
 			</article>
+			
 
 			<h2>2014 - 17 ans</h2>
 			<article>
@@ -204,7 +318,7 @@
 				<p>Avec mon ami Unixfox, nous avons développé une intégration du logiciel serveur minecraft à Linux. Le script a été utilisé sur quelques serveurs minecraft (les miens et ceux d'Unixfox entre autre, une quinzaine).</p>
 				<p>Si cette tache me semble trivial aujourd'hui, c'était la première fois que je réalisait un script conséquent en bash. Le script fonctionnait avec <code>initv</code> le système de gestion des services par défaut sur Debian 6 et était donc complètement intégré à l'OS au même titre qu'apache et les autres services. C'est également la première fois que je contribuait à un projet open-source sur github.</p>
 			</article>
-
+			
 			<article>
 				<header>
 					<a href="https://web.archive.org/web/20141119182045/devbukkit.fr/forum" target=_blank><h3>Devbukkit</h3></a>
@@ -216,7 +330,7 @@
 				<p>De 2013 à 2014, je me suis investi à font dans un forum en ligne axé développement Java/PHP et administration système. Je suis passé par les cases support et modérateur avant de devenir co-administrateur du site. Nous nous réunions chaque semaine sur skype avec un staff d'une petite vingtaine de personne pour discuter ensemble des différentes tâches à réaliser. Avec le recul, je peux dire que j'étais une sorte de HR de la plateforme, j'organisais les réunions, prenait note des décisions prises et gérait l'équipe de modération du forum. Notre équipe était constitué de développeurs, d'administrateur systèmes et d'info-graphistes en plus de la masse de membre inscrits (plus de 10.000 à la fin) qui rendait très dynamique nos échanges.</p>
 				<p>J'ai énormément appris sur le plan humain au travers de mon rôle d'administrateur. J'ai appris à travailler en équipe, à apprendre de mes erreurs, à trouver des solutions aux problèmes quotidients (et Dieu il y en a eu !). Savoir aussi appliquer des sanctions justes à ceux qui le méritaient en essayant que ces sanctions soient propices à la fois au maintient de l'ordre mais également de la bonne ambiance générale</p>
 			</article>
-
+			
 			<article id=bukkitfr>
 				<header>
 					<a href="https://web.archive.org/web/20180224041152/https://www.bukkit.fr/" target=_blank><h3>Bukkit France</h3></a>
@@ -228,6 +342,7 @@
 				<p>J'ai participé en temps que membre à cette communauté de 2012 à 2014, Bukkit France était une communauté Minecraft qui regroupait des joueurs, des administrateurs de serveur et des développeurs du jeu. C'est la première communauté "geek" que j'ai rejoint. Régulier de la catégorie support, j'ai souvent aidé des administrateurs à configurer leur serveur pour régler leurs soucis et améliorer les performences. J'ai commencé à parler régulièrement avec des développeurs Java, à lire du code
 				<p>Partager son savoir, son expérience et recevoir des retours d'autrui a réellement construit une culture informatique. Certains membres sont encore aujourd'hui des amis, une bonne partie se sont dirigés vers des études en informatique, en gestion ou en science. La culture que nous avons construit au fil des années nous donne un vrai avantage sur ceux qui commencent seulement l'informatique en supérieur.</p>
 			</article>
+			
 
 			<h2>2013 - 16 ans</h2>
 			<article>
@@ -249,6 +364,8 @@
 	<footer></footer>
 	<div id="bigimg-div">
 		<img id="bigimg" src="">
+	</div>
+	<div id="bigvid-div">
 	</div>
 </body>
 </html>
