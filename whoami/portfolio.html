@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet" type="text/css" />
 	<link rel=stylesheet href="styles.css">
 	<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+	<script src="script.js"></script>
 </head>
 <body>
 	<header>
@@ -21,7 +22,7 @@
 	<main>
 		<section>
 			<h2>Veille technologique</h2>
-			<h3 class="subtitle">10h valorisées (environ 5000h réelles depuis 2012)</h3>
+			<h3 class="subtitle">10h valorisées (environ 5.000h réelles depuis 2012)</h3>
 			<article>
 				<p>La veille technologique est le fait de se maintenir au courant des nouveauté dans le domaine des technologies : langages de programmation, logiciels, méthodologie, sécurité, bibliothèques et ainsi de suite. Au vu de l'évolution très rapide des technologies, se maintenir à la pointe est un combat du quotidient. Afin de me maintenir au top, je participe à groupe de discussion en ligne, rencontre d'autres passionnés du secteur et lis énormément.</p>
 				<header>
@@ -86,12 +87,120 @@
 						<li><a href="projets.html#bukkitfr">Bukkit France</a> - environ 1h par jour de 2012 à 2014</li>
 					</ul>
 				</p>
+			</article>
 		</section>
 		<section>
 			<h2>Administration réseau et système</h2>
+			<h3 class="subtitle">10h valorisées (environ 1.000h réelles depuis 2014)</h3>
 			<article>
-				
-			</article>
+				<p>J'héberge des serveurs depuis que j'ai 13 ans. J'ai commencé sur un vieux PC portable que je laissais allumé pour petit à petit amasser du matériel chez moi. Fabrication de câble ethernet, installation de routeurs et de switch, installation et configuration de machines physiques et virtuelles, installation de services "self-hosted", adaptation de logiciels "tout en un" à mes services, etc.</p>
+				<header>
+					<h3>Réseau domestique</h3>
+					<p>~50h</p>
+				</header>
+				<aside>
+					<img src="img/home_network_v1.png" class="thumbnail" width=32% style="border: 1px solid black">
+					<img src="img/home_network_v2.png" class="thumbnail" width=32% style="border: 1px solid black">
+					<img src="img/home_network_v3.png" class="thumbnail" width=32% style="border: 1px solid black">
+					<img src="img/home_network_v4.png" class="thumbnail" width=32% style="border: 1px solid black">
+					<img src="img/home_network_v5.png" class="thumbnail" width=32% style="border: 1px solid black">
+					<img src="img/home_hardware.jpg" class="thumbnail" width=32%>
+				</aside>
+				<p>Au vu de l'évolution de mon réseau domestique, j'ai commencé en mars 2017 à faire des schémas réseaux sur visio pour m'aider à visualiser ce que je faisais. L'hébergement de la bibliothèque de templeuve ayant ajouté un gros lot de complexité, il était nécessaire de documenter l'évolution.</p>
+				<p>La v1 correspond au début de l'hébergement du <a href="https://biblitempleuve.be" target=_blank>site de la bibliothèque de Templeuve</a> et de la cohabitation forcé de mes services avec ceux de la bibliothèque. C'est un projet où je suis ops à la manière waterfall, j'ai eu très peu de contact avec Olivier Nyst, le développeur de la solution que j'héberge, il me redirige très souvent sur son TFE m'expliquant que tout y est écrit. J'ai eu humainement beaucoup de mal à accepter le compromis entre mon infra et la sienne.</p>
+				<p>Biblitempleuve fonctionne avec trois machines virtuelles&nbsp;:
+				<ol>
+					<li>bibli-pmb&nbsp;: application web tournant sur php et délivré par un serveur Apache</li>
+					<li>bibli-firewall&nbsp;: Pare-feu/routeur linux (iptables) et point d'accès SSH</li>
+					<li>bibli-reverse-proxy&nbsp;: Reverse-proxy et terminateur SSL apache</li>
+				</ol>
+				Le problème est que j'avais déjà mon propre serveur web (nginx) et service SSH qui tournaient sur la machine debian-server. Mon client voulant avoir accès à son service le plus rapidement possible, j'ai décidé de déplacer mes ports web de (HTTP) 80 à 8000 et (HTTPS) 443 à 2443 afin de pouvoir diriger le traffic des ports HTTP/HTTPS standarts vers la machine bibli-firewall. J'ai tout de même garder le "contrôle" du port SSH standart, mon client n'ayant pas besoin des accès SSH.</p>
+				<p>La v2 correspond au moment où j'ai acheté une carte réseau physique et que je l'ai ajouté à l'hôte physique que se partage les machines virtuelles de la bibliothèque et ma debian-server. Mon objectif était d'utiliser debian-server comme router/firewall à la manière de bibli-firewall et ainsi isoler mon réseau serveur de mon réseau domestique en créant un deuxième LAN (je n'ai pas les moyens d'acheter du matériel compatible VLAN), le problème est que la carte réseau que j'ai acheté n'est pas compatible avec VMWare qui ne voit qu'une carte PCI sans intérêt particulier. De ce fait j'ai du configurer le réseau au sain de la VM debian-server (qui avait les drivers nécessaires) en plus que d'ajouter un second réseau virtuel pour les VM</p>
+				<p>La v3 correspond à la fusion (enfin) de mon reverse-proxy (nginx) et du reverse-proxy (apache) de la bibliothèque et à mes débuts avec pfSense. Sur une très courte fenêtre de maintenance de 12h, j'ai opéré à la migration de iptables à pfsense, de l'intégration de la configuration d'apache à nginx et de la reconfiguration de la VM bibli-pmb (renommé bibli-main pour l'occasion) pour appliquer les changements de l'infra.</p>
+<pre>
+De : Julien Castiaux <julien.castiaux@gmail.com>
+Envoyé : mardi 28 novembre 2017 06:03:57
+À : Anne-Marie Cruquenaire
+Objet : Migration
+ 
+Bonjour,
+
+Je reviens vers vous pour vous tenir au courant de la maintenance réseau
+qui s'est effectuée cette nuit de 21h à 5h30.
+
+Tout s'est bien passé, votre site est de nouveau accessible sans aucune
+perte de donnée.
+
+Mise à jour de sécurité: l'ancien parfeu (Linux iptables) a été remplacé
+par un FreeBSD pfSense. pfSense a l'avantage par rapport à iptables
+d'être plus simple d'utilisation et nous permettra de plus facilement
+effectuer des opérations de maintenance.
+
+Mise à jour de performance: l'ancien reverse-proxy (Apache) a été
+remplacé par un nginx. nginx est beaucoup plus puissant qu'apache, le
+chargement de votre site devrait être sensiblement plus rapide d'ici les
+prochains jours à mesure que nous apportons les modifications adéquates
+à la configuration actuelle. Nous avons encore du travail comme en
+témoigne ces analyses:
+https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fbiblitempleuve.be%2F&amp;tab=desktop
+
+Tout ceci a été accompagné par une mise à jour des systèmes déjà installés.
+
+Bonne journée,
+Julien Castiaux, administrateur système et réseau
+</pre>
+				<p>Pour la v4 je me suis débarrassé du pare-feu qui ne servait à rien vu que la configuration de la NAT filtrait déjà tout ce que le pare-feu refiltrait derrière, je ne suis plus à l'abris d'une attaque depuis mon propre réseau domestique mais la gestion de mon infra en est très simplifié</p>
+				<p>Grâce à mon stage, j'ai pu récupérer un serveur supplémentaire, la v5 atteste de l'ajout de ce serveur et des quelques machines virtuelles supplémentaires nécessaires à la réalisation de mon travail de fin d'étude</p>
+				<header>
+					<h3>Services domestiques (debian-server)</h3>
+					<p>~1.000h depuis 2014</p>
+				</header>
+				<p>debian-server est mon bébé, mon serveur domestique qui tourne depuis que j'ai réussi ma première formation linux en 2014 (j'avais 17 ans). Tout sur cette machine a été installé et configuré par mes soins, ce qui était un debian-6-netinstall hier a évolué de version en version. J'ai connu la transition vers systemd
+				<p>Tournent actuellement sur la machine debian-server&nbsp;:
+				<aside>
+<pre>
+julien@debian-server:~$ sudo netstat -pnlt4
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 0.0.0.0:53              0.0.0.0:*               LISTEN      672/dnsmasq
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      648/sshd
+tcp        0      0 0.0.0.0:5432            0.0.0.0:*               LISTEN      22096/postgres
+tcp        0      0 127.0.0.1:8888          0.0.0.0:*               LISTEN      9789/rslsync
+tcp        0      0 0.0.0.0:25              0.0.0.0:*               LISTEN      1417/master
+tcp        0      0 127.0.0.1:6010          0.0.0.0:*               LISTEN      21812/sshd: julien@
+tcp        0      0 0.0.0.0:443             0.0.0.0:*               LISTEN      4577/nginx: worker
+tcp        0      0 127.0.0.1:5001          0.0.0.0:*               LISTEN      637/python
+tcp        0      0 0.0.0.0:6379            0.0.0.0:*               LISTEN      681/redis-server *:
+tcp        0      0 0.0.0.0:38288           0.0.0.0:*               LISTEN      9789/rslsync
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      4577/nginx: worker
+</pre>
+				</aside>
+					<ul>
+						<li>sshd&nbsp;: serveur ssh</li>
+						<li>nginx&nbsp;: serveur web, reverse-proxy, terminateur ssl</li>
+						<li>spigot&nbsp;: serveur minecraft</li>
+						<li>gitea&nbsp;: serveur git</li>
+						<li>postgresql&nbsp;: SGBD relationnel</li>
+						<li>redis-server&nbsp;: key-value store distribué</li>
+						<li>dnsmasq&nbsp;: autorité DNS interne et cache DNS</li>
+						<li>pylint-as-a-service&nbsp;: le linter python accessible en ligne</li>
+						<li>iptables&nbsp;: le pare-feu/routeur intégré à linux</li>
+						<li>fail2ban&nbsp;: outil de détection de tentative d'intrusion</li>
+					</ul>
+				Pour gitea et spigot je me suis occupé de l'intégration à systemd (symlink des fichiers de configuration et écriture des unit files), je n'ai pas encore eu le temps de les packager pour debian. pylint-as-a-service n'est pas encore intégré à l'OS. Pour les autres services je n'ai eu "qu'à" les configurer selon mes besoins.</p>
+				<p>Ces services ont également tournés pendant un temps&nbsp;:
+					<ul>
+						<li>proftpd&nbsp;: serveur FTP (je fais du sftp maintenant)</li>
+						<li>unrealircd&nbsp;: serveur IRC (premier serveur IRC en 2014)</li>
+						<li>inspircd&nbsp;: serveur IRC (plus cool qu'unreal mais dont je n'ai plus le temps de m'occuper)</li>
+						<li>gitlab&nbsp;: serveur git (plus lourd que gitea)</li>
+						<li>bukkit&nbsp;: serveur minecraft (prédécesseur de spigot)</li>
+						<li>mysql&nbsp;: SGBD relationnel (naze comparé à postgres)</li>
+						<li>apache&nbsp;: serveur web (naze comparé à nginx)</li>
+						<li>ufw&nbsp;: firewall (avant que je sache config iptables)</li>
+					</ul>
+				Sérieusement, juste la configuration d'inspiRCd mériterait une section à elle seule, elle fait plusieurs dizaine de milliers de lignes. Chaque fonctionnalité se trouve au sain d'un module qu'il faut charger et configurer. Il faut également installer et configurer des services externes comme Anope (ChanServ, NickServ), j'ai passé des nuits entières à mettre sur pied un réseau IRC pour répondre aux besoins d'une communauté qui grandissait au delà des capacités de skype.
+				</p>
 		</section>
 		<section>
 			<h2>Hackathon</h2>
@@ -131,5 +240,9 @@
 		</section>
 	</main>
 	<footer></footer>
+	<div id="bigimg-div">
+		<img id="bigimg" src="">
+	</div>
+	<div id="bigvid-div"></div>
 </body>
 </html>

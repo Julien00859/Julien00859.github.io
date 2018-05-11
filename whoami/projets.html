@@ -6,42 +6,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet" type="text/css" />
 	<link rel=stylesheet href="styles.css">
 	<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
-	<script>
-		window.onload = _ => {
-			const bigimgdiv = document.getElementById("bigimg-div");
-			const bigviddiv = document.getElementById("bigvid-div");
-			console.log(bigviddiv)
-			const bigimg = document.getElementById("bigimg");
-			bigimgdiv.onclick = _ => {
-				bigimgdiv.setAttribute("hidden", "true");
-			}
-			bigviddiv.onclick = _ => {
-				bigviddiv.setAttribute("hidden", "true");
-			}
-			const thumbnails = document.getElementsByClassName("thumbnail");
-			Array.prototype.forEach.call(thumbnails, ele => {
-				ele.onclick = _ => {
-					src = ele.getAttribute("src").replace("-thumbnail", "");
-					bigimg.setAttribute("src", src);
-					bigimgdiv.removeAttribute("hidden");
-				}
-			})
-			const thumbnails_vid = document.getElementsByClassName("video-thumbnail");
-			Array.prototype.forEach.call(thumbnails_vid, ele => {
-				ele.onclick = _ => {
-					src = (/https:\/\/img\.youtube\.com\/vi\/(.*?)\/0\.jpg/).exec(ele.getAttribute("src"))[1];
-					console.log(src)
-					bigviddiv.innerHTML = `<iframe width="720" height="405" src="https://www.youtube.com/embed/${src}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
-					bigviddiv.removeAttribute("hidden");
-					setTimeout(function() {window.onclick = _ => {
-						window.onclick = null;
-						bigviddiv.removeChild(bigviddiv.firstChild);
-						bigviddiv.setAttribute("hidden", "true");
-					}}, 0)
-				}
-			})
-		}
-	</script>
+	<script src="script.js"></script>
 </head>
 <body>
 	<header>
@@ -146,7 +111,6 @@ $ ./sudokurs
 					<img class="video-thumbnail" src="https://img.youtube.com/vi/Fr-jgnljfug/0.jpg" width=33%>
 					<img class="video-thumbnail" src="https://img.youtube.com/vi/H416N37ehCc/0.jpg" width=33%>
 					<img class="video-thumbnail" src="https://img.youtube.com/vi/AZZu3EtLtnM/0.jpg" width=33%>
-					
 				</aside>
 			</article>
 			
@@ -156,6 +120,7 @@ $ ./sudokurs
 					<p><i class="far fa-comments"></i> Rencontre</p>
 				</header>
 				<p>Rencontre à Bruxelles avec des développeurs Python dont je ne garde pas un bon souvenir. J'étais le seul développeur web de la salle et des petits groupes se sont très rapidement formés: d'un coté les ops qui utilisaient python via Ansible, de l'autre des scientifiques qui utilisaient python pour du big-data et du machine learning et quelques paumés perdu au centre qui avaient codé en python "il y a longtemps".</p>
+				<p>Ce meetup m'a fait me rendre compte que même dans le millieu professionnel, les gens ne sont pas plus geek que durant les études.</p>
 			</article>
 			
 
@@ -168,13 +133,6 @@ $ ./sudokurs
 				<p><a href=#webgames>Voir la description de Webgames</a></p>
 				<p>La version originale était une implémentation du jeu Bomberman dans le navigateur (mon ami Mathieu Rousseau s'étant occupé de tout le front-end), ce projet a dérivé sur l'exploration de différentes bibliothèques de gestion de la concurence en python (multi-threading, multi-processing) et de la toute jeune bibliothèque asyncio (modèle réseau asynchrone) et des jeunes frameworks web qui en découlaient (aiohttp et sanic)</p>
 				<p>Chaque version m'était l'accent sur une partie précise, tantôt l'optimisation des jeux vidéos, tantôt la sécurité de l'app, tantôt la haute disponibilité. Au final j'ai décidé de finir ce projet seul via mon travail de fin d'étude.</p>
-			</article>
-			
-			<article>
-				<header>
-					<h3>sudoku.js</h3>
-					<p><i style="color: red" class="fa fa-times-circle"></i> Jeu</p>
-				</header>
 			</article>
 			
 			<article id="devrant-meetup">
@@ -217,6 +175,8 @@ $ ./sudokurs
 					<h3><a href="http://www.devday.be/">Dev Day Mons 2017</a></h3>
 					<p><i class="far fa-comments"></i> Rencontre</p>
 				</header>
+				<p>Organisé en partie par le Microsoft Innovation Center, la Dev Day 2017 à Mons était assez axé technologies Microsoft comme C#, ASP .NET Core ou SQL Server.</p>
+				<p>Les conférences étaient pour la plupart intéressante et nombre d'entre nous (nous y allions en car avec l'EPHEC) sommes rentré avec l'intention de s'intéresser de plus près à ces technologies</p>
 				<aside>
 					<img src="img/devday.png">
 				</aside>

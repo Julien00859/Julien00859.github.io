@@ -71,10 +71,13 @@ footer {
 }
 
 #bigimg-div, #bigvid-div {
+	display: none;
 	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	background-color: rgba(0, 0, 0, 0.5);
+	border: 1px solid black;
 }
 
 img.thumbnail, img.video-thumbnail {
