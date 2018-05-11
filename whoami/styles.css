@@ -18,7 +18,7 @@ aside {
 	display: flex;
   -webkit-flex-flow: row wrap;
 	justify-content: space-around;
-	align-items: baseline;	
+	align-items: center;	
 }
 article header {
 	align-items: center;
