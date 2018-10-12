@@ -8,6 +8,11 @@ header {
 	justify-content: space-between;
 	align-items: baseline;
 }
+footer {
+	margin-top: 3em;
+	font-size: smaller;
+	text-align: center;
+}
 .subtitle {
 	text-decoration: none;
 	font-style: italic;
