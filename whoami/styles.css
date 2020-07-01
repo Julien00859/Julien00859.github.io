@@ -57,6 +57,11 @@ footer {
 	min-height: 5em;
 }
 
+#skill article div p {
+	display: inline-block;
+	margin-left: 2.5em;
+}
+
 @media print {
 	header nav, footer {
 		display: none;
